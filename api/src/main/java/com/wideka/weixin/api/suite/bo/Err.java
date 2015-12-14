@@ -9,7 +9,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @author JiakunXu
  * 
  */
-public class Error implements Serializable {
+public class Err implements Serializable {
 
 	private static final long serialVersionUID = 5298150005183000384L;
 

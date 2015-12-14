@@ -1,8 +1,14 @@
 package com.wideka.weixin.api.auth.bo;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.wideka.weixin.api.suite.bo.Err;
 
-public class PreAuthCode extends Error {
+/**
+ * 
+ * @author JiakunXu
+ * 
+ */
+public class PreAuthCode extends Err {
 
 	private static final long serialVersionUID = 6789848637410236083L;
 

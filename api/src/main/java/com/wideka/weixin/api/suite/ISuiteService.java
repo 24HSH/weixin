@@ -9,7 +9,7 @@ import com.wideka.weixin.api.suite.bo.SuiteAccessToken;
  */
 public interface ISuiteService {
 
-	String HTTPS_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/service/get_suite_token";
+	String HTTPS_SUITE_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/service/get_suite_token";
 
 	/**
 	 * 
