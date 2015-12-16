@@ -32,8 +32,8 @@ public class AccessTokenServiceImpl implements IAccessTokenService {
 		try {
 			accessToken =
 				JSON.parseObject(
-					HttpUtil.get(IAccessTokenService.HTTPS_TOKEN_URL.replace("$id$", corpId).replace("$secrect$",
-						corpSecret)), AccessToken.class);
+					HttpUtil.get(IAccessTokenService.HTTPS_TOKEN_URL.replace("$id$", corpId.trim()).replace(
+						"$secrect$", corpSecret.trim())), AccessToken.class);
 		} catch (Exception e) {
 			logger.error(corpId + "&" + corpSecret, e);
 

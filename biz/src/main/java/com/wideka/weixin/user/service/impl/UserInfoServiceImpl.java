@@ -31,9 +31,8 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 		try {
 			userInfo =
-				JSON.parseObject(
-					HttpUtil.get(IUserInfoService.HTTPS_USER_INFO_URL.replace("$ACCESS_TOKEN$", accessToken).replace(
-						"$CODE$", code)), UserInfo.class);
+				JSON.parseObject(HttpUtil.get(IUserInfoService.HTTPS_USER_INFO_URL.replace("$ACCESS_TOKEN$",
+					accessToken.trim()).replace("$CODE$", code.trim())), UserInfo.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + code, e);
 
