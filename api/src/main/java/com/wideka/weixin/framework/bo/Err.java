@@ -1,4 +1,4 @@
-package com.wideka.weixin.api.suite.bo;
+package com.wideka.weixin.framework.bo;
 
 import java.io.Serializable;
 

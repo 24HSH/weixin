@@ -8,8 +8,8 @@ import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.auth.IPreAuthService;
 import com.wideka.weixin.api.auth.bo.PreAuthCode;
-import com.wideka.weixin.api.suite.bo.Err;
 import com.wideka.weixin.api.suite.bo.Suite;
+import com.wideka.weixin.framework.bo.Err;
 
 /**
  * 
