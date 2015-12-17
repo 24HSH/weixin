@@ -1,15 +1,14 @@
 package com.wideka.weixin.api.agent.bo;
 
-import java.io.Serializable;
-
 import com.alibaba.fastjson.annotation.JSONField;
+import com.wideka.weixin.framework.bo.Err;
 
 /**
  * 
  * @author JiakunXu
  * 
  */
-public class Agent implements Serializable {
+public class Agent extends Err {
 
 	private static final long serialVersionUID = 5689861487465980259L;
 
@@ -48,6 +47,12 @@ public class Agent implements Serializable {
 	 */
 	@JSONField(name = "api_group")
 	private String[] apiGroup;
+
+	/**
+	 * 授权方企业应用详情.
+	 */
+	@JSONField(name = "description")
+	private String description;
 
 	public int getAgentId() {
 		return agentId;
@@ -95,6 +100,14 @@ public class Agent implements Serializable {
 
 	public void setApiGroup(String[] apiGroup) {
 		this.apiGroup = apiGroup;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

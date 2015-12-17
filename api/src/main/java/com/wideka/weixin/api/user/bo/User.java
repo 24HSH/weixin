@@ -8,7 +8,7 @@ import com.wideka.weixin.framework.bo.Err;
  * @author JiakunXu
  * 
  */
-public class UserInfo extends Err {
+public class User extends Err {
 
 	private static final long serialVersionUID = 4716372335911707525L;
 
@@ -29,6 +29,9 @@ public class UserInfo extends Err {
 	 */
 	@JSONField(name = "OpenId")
 	private String openId;
+
+	@JSONField(name = "status")
+	private int status;
 
 	public String getUserId() {
 		return userId;
@@ -52,6 +55,14 @@ public class UserInfo extends Err {
 
 	public void setOpenId(String openId) {
 		this.openId = openId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

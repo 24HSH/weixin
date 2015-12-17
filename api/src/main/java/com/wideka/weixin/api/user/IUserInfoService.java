@@ -1,6 +1,6 @@
 package com.wideka.weixin.api.user;
 
-import com.wideka.weixin.api.user.bo.UserInfo;
+import com.wideka.weixin.api.user.bo.User;
 
 /**
  * 
@@ -21,6 +21,6 @@ public interface IUserInfoService {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	UserInfo getUserInfo(String accessToken, String code) throws RuntimeException;
+	User getUserInfo(String accessToken, String code) throws RuntimeException;
 
 }
