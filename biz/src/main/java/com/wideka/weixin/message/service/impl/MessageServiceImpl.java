@@ -64,9 +64,9 @@ public class MessageServiceImpl implements IMessageService {
 		}
 
 		Message message = new Message();
-		message.setToUser(toUser.trim());
-		message.setToParty(toParty.trim());
-		message.setToTag(toTag.trim());
+		message.setToUser(StringUtils.trim(toUser));
+		message.setToParty(StringUtils.trim(toParty));
+		message.setToTag(StringUtils.trim(toTag));
 		message.setMsgType("text");
 		message.setAgentId(agentId);
 		message.setText(text);
@@ -87,9 +87,9 @@ public class MessageServiceImpl implements IMessageService {
 		}
 
 		Message message = new Message();
-		message.setToUser(toUser.trim());
-		message.setToParty(toParty.trim());
-		message.setToTag(toTag.trim());
+		message.setToUser(StringUtils.trim(toUser));
+		message.setToParty(StringUtils.trim(toParty));
+		message.setToTag(StringUtils.trim(toTag));
 		message.setMsgType("image");
 		message.setAgentId(agentId);
 		message.setImage(image);
@@ -110,9 +110,9 @@ public class MessageServiceImpl implements IMessageService {
 		}
 
 		Message message = new Message();
-		message.setToUser(toUser.trim());
-		message.setToParty(toParty.trim());
-		message.setToTag(toTag.trim());
+		message.setToUser(StringUtils.trim(toUser));
+		message.setToParty(StringUtils.trim(toParty));
+		message.setToTag(StringUtils.trim(toTag));
 		message.setMsgType("voice");
 		message.setAgentId(agentId);
 		message.setVoice(voice);
@@ -133,9 +133,9 @@ public class MessageServiceImpl implements IMessageService {
 		}
 
 		Message message = new Message();
-		message.setToUser(toUser.trim());
-		message.setToParty(toParty.trim());
-		message.setToTag(toTag.trim());
+		message.setToUser(StringUtils.trim(toUser));
+		message.setToParty(StringUtils.trim(toParty));
+		message.setToTag(StringUtils.trim(toTag));
 		message.setMsgType("video");
 		message.setAgentId(agentId);
 		message.setVideo(video);
@@ -156,9 +156,9 @@ public class MessageServiceImpl implements IMessageService {
 		}
 
 		Message message = new Message();
-		message.setToUser(toUser.trim());
-		message.setToParty(toParty.trim());
-		message.setToTag(toTag.trim());
+		message.setToUser(StringUtils.trim(toUser));
+		message.setToParty(StringUtils.trim(toParty));
+		message.setToTag(StringUtils.trim(toTag));
 		message.setMsgType("file");
 		message.setAgentId(agentId);
 		message.setFile(file);
@@ -179,9 +179,9 @@ public class MessageServiceImpl implements IMessageService {
 		}
 
 		Message message = new Message();
-		message.setToUser(toUser.trim());
-		message.setToParty(toParty.trim());
-		message.setToTag(toTag.trim());
+		message.setToUser(StringUtils.trim(toUser));
+		message.setToParty(StringUtils.trim(toParty));
+		message.setToTag(StringUtils.trim(toTag));
 		message.setMsgType("news");
 		message.setAgentId(agentId);
 		message.setNews(news);
@@ -207,9 +207,9 @@ public class MessageServiceImpl implements IMessageService {
 		}
 
 		Message message = new Message();
-		message.setToUser(toUser.trim());
-		message.setToParty(toParty.trim());
-		message.setToTag(toTag.trim());
+		message.setToUser(StringUtils.trim(toUser));
+		message.setToParty(StringUtils.trim(toParty));
+		message.setToTag(StringUtils.trim(toTag));
 		message.setMsgType("mpnews");
 		message.setAgentId(agentId);
 		message.setMpNews(mpNews);
