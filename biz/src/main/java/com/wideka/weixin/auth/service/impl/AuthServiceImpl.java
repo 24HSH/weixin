@@ -8,7 +8,7 @@ import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.auth.IAuthService;
 import com.wideka.weixin.api.auth.bo.Info;
-import com.wideka.weixin.api.suite.bo.Suite;
+import com.wideka.weixin.api.suite.bo.SuiteExtends;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class AuthServiceImpl implements IAuthService {
 			throw new RuntimeException("permanent_code cannot be null.");
 		}
 
-		Suite suite = new Suite();
+		SuiteExtends suite = new SuiteExtends();
 		suite.setSuiteId(suiteId.trim());
 		suite.setAuthCorpId(authCorpId.trim());
 		suite.setPermanentCode(permanentCode.trim());
