@@ -1,6 +1,7 @@
 package com.wideka.weixin.auth.service.impl;
 
 import com.wideka.weixin.api.auth.IPermanentService;
+import com.wideka.weixin.api.auth.bo.PermanentCode;
 
 /**
  * 
@@ -10,9 +11,10 @@ import com.wideka.weixin.api.auth.IPermanentService;
 public class PermanentServiceImpl implements IPermanentService {
 
 	@Override
-	public void get_permanent_code(String suiteAccessToken, String suiteId, String authCode) {
+	public PermanentCode getPermanentCode(String suiteAccessToken, String suiteId, String authCode) {
 		// TODO Auto-generated method stub
 
+		return null;
 	}
 
 }
