@@ -30,6 +30,18 @@ public class Suite implements Serializable {
 	@JSONField(name = "auth_code")
 	private String authCode;
 
+	/**
+	 * 授权方corpid.
+	 */
+	@JSONField(name = "auth_corpid")
+	private String authCorpId;
+
+	/**
+	 * 永久授权码，通过get_permanent_code获取.
+	 */
+	@JSONField(name = "permanent_code")
+	private String permanentCode;
+
 	public String getSuiteId() {
 		return suiteId;
 	}
@@ -60,6 +72,22 @@ public class Suite implements Serializable {
 
 	public void setAuthCode(String authCode) {
 		this.authCode = authCode;
+	}
+
+	public String getAuthCorpId() {
+		return authCorpId;
+	}
+
+	public void setAuthCorpId(String authCorpId) {
+		this.authCorpId = authCorpId;
+	}
+
+	public String getPermanentCode() {
+		return permanentCode;
+	}
+
+	public void setPermanentCode(String permanentCode) {
+		this.permanentCode = permanentCode;
 	}
 
 }
