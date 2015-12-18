@@ -19,6 +19,7 @@ public interface IMessageService {
 	String HTTPS_MESSAGE_URL = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=";
 
 	/**
+	 * text消息.
 	 * 
 	 * @param accessToken
 	 * @param toUser
@@ -34,6 +35,7 @@ public interface IMessageService {
 		throws RuntimeException;
 
 	/**
+	 * image消息.
 	 * 
 	 * @param accessToken
 	 * @param toUser
@@ -49,6 +51,7 @@ public interface IMessageService {
 		String safe) throws RuntimeException;
 
 	/**
+	 * voice消息.
 	 * 
 	 * @param accessToken
 	 * @param toUser
@@ -64,6 +67,7 @@ public interface IMessageService {
 		String safe) throws RuntimeException;
 
 	/**
+	 * video消息.
 	 * 
 	 * @param accessToken
 	 * @param toUser
@@ -79,6 +83,7 @@ public interface IMessageService {
 		String safe) throws RuntimeException;
 
 	/**
+	 * file消息.
 	 * 
 	 * @param accessToken
 	 * @param toUser
@@ -94,6 +99,7 @@ public interface IMessageService {
 		throws RuntimeException;
 
 	/**
+	 * news消息.
 	 * 
 	 * @param accessToken
 	 * @param toUser
@@ -108,6 +114,7 @@ public interface IMessageService {
 		throws RuntimeException;
 
 	/**
+	 * mpnews消息.
 	 * 
 	 * @param accessToken
 	 * @param toUser
