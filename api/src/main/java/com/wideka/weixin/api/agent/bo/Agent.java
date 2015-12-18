@@ -1,14 +1,14 @@
 package com.wideka.weixin.api.agent.bo;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.wideka.weixin.framework.bo.Err;
+import com.wideka.weixin.framework.bo.Result;
 
 /**
  * 
  * @author JiakunXu
  * 
  */
-public class Agent extends Err {
+public class Agent extends Result {
 
 	private static final long serialVersionUID = 5689861487465980259L;
 
@@ -48,11 +48,61 @@ public class Agent extends Err {
 	@JSONField(name = "api_group")
 	private String[] apiGroup;
 
+	// >>>>>>>>>>以下是基本属性<<<<<<<<<<
+
 	/**
 	 * 授权方企业应用详情.
 	 */
 	@JSONField(name = "description")
 	private String description;
+
+	/**
+	 * 授权方企业应用可见范围（人员），其中包括userid和关注状态state.
+	 */
+	@JSONField(name = "allow_userinfos")
+	private AllowUserInfos allowUserInfos;
+
+	/**
+	 * 授权方企业应用可见范围（部门）.
+	 */
+	@JSONField(name = "allow_partys")
+	private AllowPartys allowPartys;
+
+	/**
+	 * 授权方企业应用可见范围（标签）.
+	 */
+	@JSONField(name = "allow_tags")
+	private AllowTags allowTags;
+
+	/**
+	 * 授权方企业应用是否被禁用.
+	 */
+	@JSONField(name = "close")
+	private int close;
+
+	/**
+	 * 授权方企业应用可信域名.
+	 */
+	@JSONField(name = "redirect_domain")
+	private String redirectDomain;
+
+	/**
+	 * report_location_flag 授权方企业应用是否打开地理位置上报 0：不上报；1：进入会话上报；2：持续上报.
+	 */
+	@JSONField(name = "report_location_flag")
+	private int reportLocationFlag;
+
+	/**
+	 * 是否接收用户变更通知。0：不接收；1：接收.
+	 */
+	@JSONField(name = "isreportuser")
+	private int isReportUser;
+
+	/**
+	 * 是否上报用户进入应用事件。0：不接收；1：接收.
+	 */
+	@JSONField(name = "isreportenter")
+	private int isReportEnter;
 
 	public int getAgentId() {
 		return agentId;
@@ -108,6 +158,70 @@ public class Agent extends Err {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public AllowUserInfos getAllowUserInfos() {
+		return allowUserInfos;
+	}
+
+	public void setAllowUserInfos(AllowUserInfos allowUserInfos) {
+		this.allowUserInfos = allowUserInfos;
+	}
+
+	public AllowPartys getAllowPartys() {
+		return allowPartys;
+	}
+
+	public void setAllowPartys(AllowPartys allowPartys) {
+		this.allowPartys = allowPartys;
+	}
+
+	public AllowTags getAllowTags() {
+		return allowTags;
+	}
+
+	public void setAllowTags(AllowTags allowTags) {
+		this.allowTags = allowTags;
+	}
+
+	public int getClose() {
+		return close;
+	}
+
+	public void setClose(int close) {
+		this.close = close;
+	}
+
+	public String getRedirectDomain() {
+		return redirectDomain;
+	}
+
+	public void setRedirectDomain(String redirectDomain) {
+		this.redirectDomain = redirectDomain;
+	}
+
+	public int getReportLocationFlag() {
+		return reportLocationFlag;
+	}
+
+	public void setReportLocationFlag(int reportLocationFlag) {
+		this.reportLocationFlag = reportLocationFlag;
+	}
+
+	public int getIsReportUser() {
+		return isReportUser;
+	}
+
+	public void setIsReportUser(int isReportUser) {
+		this.isReportUser = isReportUser;
+	}
+
+	public int getIsReportEnter() {
+		return isReportEnter;
+	}
+
+	public void setIsReportEnter(int isReportEnter) {
+		this.isReportEnter = isReportEnter;
 	}
 
 }

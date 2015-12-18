@@ -9,7 +9,7 @@ import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.auth.IPreAuthService;
 import com.wideka.weixin.api.auth.bo.PreAuthCode;
 import com.wideka.weixin.api.suite.bo.Suite;
-import com.wideka.weixin.framework.bo.Err;
+import com.wideka.weixin.framework.bo.Result;
 
 /**
  * 
@@ -89,13 +89,13 @@ public class PreAuthServiceImpl implements IPreAuthService {
 		params.append("}");
 		params.append("}");
 
-		Err err = null;
+		Result err = null;
 
 		try {
 			err =
 				JSON.parseObject(
 					HttpUtil.post(IPreAuthService.HTTPS_SESSION_INFO_URL + suiteAccessToken, params.toString()),
-					Err.class);
+					Result.class);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(params), e);
 

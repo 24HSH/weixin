@@ -1,14 +1,14 @@
 package com.wideka.weixin.api.user.bo;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.wideka.weixin.framework.bo.Err;
+import com.wideka.weixin.framework.bo.Result;
 
 /**
  * 
  * @author JiakunXu
  * 
  */
-public class User extends Err {
+public class User extends Result {
 
 	private static final long serialVersionUID = 4716372335911707525L;
 
