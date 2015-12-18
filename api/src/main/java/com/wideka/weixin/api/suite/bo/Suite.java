@@ -22,6 +22,14 @@ public class Suite implements Serializable {
 	@JSONField(name = "suite_ticket")
 	private String suiteTicket;
 
+	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
+
+	/**
+	 * 临时授权码会在授权成功时附加在redirect_uri中跳转回应用提供商网站.
+	 */
+	@JSONField(name = "auth_code")
+	private String authCode;
+
 	public String getSuiteId() {
 		return suiteId;
 	}
@@ -44,6 +52,14 @@ public class Suite implements Serializable {
 
 	public void setSuiteTicket(String suiteTicket) {
 		this.suiteTicket = suiteTicket;
+	}
+
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
 	}
 
 }
