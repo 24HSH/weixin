@@ -9,11 +9,17 @@ public interface ICallbackService {
 
 	/**
 	 * 
+	 * @param token
+	 * @param encodingAesKey
+	 * @param corpId
 	 * @param signature
 	 * @param timestamp
 	 * @param nonce
+	 * @param echostr
 	 * @return
+	 * @throws RuntimeException
 	 */
-	String receive(String signature, String timestamp, String nonce);
+	String verify(String token, String encodingAesKey, String corpId, String signature, String timestamp, String nonce,
+		String echostr) throws RuntimeException;
 
 }
