@@ -8,7 +8,7 @@ import com.wideka.weixin.api.agent.bo.Agent;
  * @author JiakunXu
  * 
  */
-public class SuiteExtends extends Suite {
+public class SuiteExtend extends Suite {
 
 	private static final long serialVersionUID = -6358122226044239616L;
 

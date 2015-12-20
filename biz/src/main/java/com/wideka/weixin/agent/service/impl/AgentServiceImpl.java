@@ -8,7 +8,7 @@ import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.agent.IAgentService;
 import com.wideka.weixin.api.agent.bo.Agent;
-import com.wideka.weixin.api.suite.bo.SuiteExtends;
+import com.wideka.weixin.api.suite.bo.SuiteExtend;
 import com.wideka.weixin.framework.bo.Result;
 
 /**
@@ -39,7 +39,7 @@ public class AgentServiceImpl implements IAgentService {
 			throw new RuntimeException("permanent_code cannot be null.");
 		}
 
-		SuiteExtends suite = new SuiteExtends();
+		SuiteExtend suite = new SuiteExtend();
 		suite.setSuiteId(suiteId.trim());
 		suite.setAuthCorpId(authCorpId.trim());
 		suite.setPermanentCode(permanentCode.trim());
@@ -92,7 +92,7 @@ public class AgentServiceImpl implements IAgentService {
 			throw new RuntimeException("agent cannot be null.");
 		}
 
-		SuiteExtends suite = new SuiteExtends();
+		SuiteExtend suite = new SuiteExtend();
 		suite.setSuiteId(suiteId.trim());
 		suite.setAuthCorpId(authCorpId.trim());
 		suite.setPermanentCode(permanentCode.trim());
