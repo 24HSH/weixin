@@ -22,4 +22,19 @@ public interface ICallbackService {
 	String verify(String token, String encodingAesKey, String corpId, String signature, String timestamp, String nonce,
 		String echostr) throws RuntimeException;
 
+	/**
+	 * 
+	 * @param token
+	 * @param encodingAesKey
+	 * @param corpId
+	 * @param signature
+	 * @param timestamp
+	 * @param nonce
+	 * @param data
+	 * @return
+	 * @throws RuntimeException
+	 */
+	String callback(String token, String encodingAesKey, String corpId, String signature, String timestamp,
+		String nonce, String data) throws RuntimeException;
+
 }

@@ -16,9 +16,8 @@ public class CallbackServiceImpl implements ICallbackService {
 
 	private static Logger logger = Logger.getLogger(CallbackServiceImpl.class);
 
-	@Override
-	public String verify(String token, String encodingAesKey, String corpId, String signature, String timestamp,
-		String nonce, String echostr) throws RuntimeException {
+	private void validate(String token, String encodingAesKey, String corpId, String signature, String timestamp,
+		String nonce) throws RuntimeException {
 		if (StringUtils.isBlank(token)) {
 			throw new RuntimeException("token cannot be null.");
 		}
@@ -42,6 +41,13 @@ public class CallbackServiceImpl implements ICallbackService {
 		if (StringUtils.isBlank(nonce)) {
 			throw new RuntimeException("nonce cannot be null.");
 		}
+	}
+
+	@Override
+	public String verify(String token, String encodingAesKey, String corpId, String signature, String timestamp,
+		String nonce, String echostr) throws RuntimeException {
+
+		validate(token, encodingAesKey, corpId, signature, timestamp, nonce);
 
 		if (StringUtils.isBlank(echostr)) {
 			throw new RuntimeException("echostr cannot be null.");
@@ -59,6 +65,35 @@ public class CallbackServiceImpl implements ICallbackService {
 
 		try {
 			return wxcpt.VerifyURL(signature.trim(), timestamp.trim(), nonce.trim(), echostr.trim());
+		} catch (AesException e) {
+			logger.error(e);
+
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	@Override
+	public String callback(String token, String encodingAesKey, String corpId, String signature, String timestamp,
+		String nonce, String data) throws RuntimeException {
+
+		validate(token, encodingAesKey, corpId, signature, timestamp, nonce);
+
+		if (StringUtils.isBlank(data)) {
+			throw new RuntimeException("data cannot be null.");
+		}
+
+		WXBizMsgCrypt wxcpt = null;
+
+		try {
+			wxcpt = new WXBizMsgCrypt(token.trim(), encodingAesKey.trim(), corpId.trim());
+		} catch (AesException e) {
+			logger.error(e);
+
+			throw new RuntimeException(e.getMessage());
+		}
+
+		try {
+			return wxcpt.DecryptMsg(signature.trim(), timestamp.trim(), nonce.trim(), data.trim());
 		} catch (AesException e) {
 			logger.error(e);
 
