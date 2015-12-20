@@ -7,6 +7,8 @@ package com.wideka.weixin.api.suite;
  */
 public interface ICallbackService {
 
+	String HTTPS_CALLBACK_IP_URL = "https://qyapi.weixin.qq.com/cgi-bin/getcallbackip?access_token=";
+
 	/**
 	 * 
 	 * @param token
@@ -36,5 +38,14 @@ public interface ICallbackService {
 	 */
 	String callback(String token, String encodingAesKey, String corpId, String signature, String timestamp,
 		String nonce, String data) throws RuntimeException;
+
+	/**
+	 * 
+	 * @param accessToken
+	 *            调用接口凭证.
+	 * @return
+	 * @throws RuntimeException
+	 */
+	String[] getCallbackIP(String accessToken) throws RuntimeException;
 
 }

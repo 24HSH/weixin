@@ -3,9 +3,12 @@ package com.wideka.weixin.suite.service.impl;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.alibaba.fastjson.JSON;
 import com.qq.weixin.mp.aes.AesException;
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.weixin.api.suite.ICallbackService;
+import com.wideka.weixin.api.suite.bo.IP;
 
 /**
  * 
@@ -98,6 +101,22 @@ public class CallbackServiceImpl implements ICallbackService {
 			logger.error(e);
 
 			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	@Override
+	public String[] getCallbackIP(String accessToken) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		try {
+			IP ip = JSON.parseObject(HttpUtil.get(ICallbackService.HTTPS_CALLBACK_IP_URL + accessToken), IP.class);
+			return ip.getIpList();
+		} catch (Exception e) {
+			logger.error(e);
+
+			throw new RuntimeException("HttpUtil error.", e);
 		}
 	}
 
