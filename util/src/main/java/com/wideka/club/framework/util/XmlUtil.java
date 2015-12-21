@@ -14,7 +14,7 @@ import org.dom4j.Visitor;
  */
 public final class XmlUtil {
 
-	static Logger logger = Logger.getLogger(XmlUtil.class);
+	private static Logger logger = Logger.getLogger(XmlUtil.class);
 
 	private XmlUtil() {
 
