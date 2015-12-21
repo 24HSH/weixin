@@ -1,4 +1,4 @@
-package com.wideka.weixin.suite.service.impl;
+package com.wideka.weixin.callback.service.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -7,7 +7,9 @@ import com.alibaba.fastjson.JSON;
 import com.qq.weixin.mp.aes.AesException;
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 import com.wideka.club.framework.util.HttpUtil;
-import com.wideka.weixin.api.suite.ICallbackService;
+import com.wideka.club.framework.util.XmlUtil;
+import com.wideka.weixin.api.callback.ICallbackService;
+import com.wideka.weixin.api.callback.bo.Content;
 import com.wideka.weixin.api.suite.bo.IP;
 
 /**
@@ -76,7 +78,7 @@ public class CallbackServiceImpl implements ICallbackService {
 	}
 
 	@Override
-	public String callback(String token, String encodingAesKey, String corpId, String signature, String timestamp,
+	public Content callback(String token, String encodingAesKey, String corpId, String signature, String timestamp,
 		String nonce, String data) throws RuntimeException {
 
 		validate(token, encodingAesKey, corpId, signature, timestamp, nonce);
@@ -96,8 +98,13 @@ public class CallbackServiceImpl implements ICallbackService {
 		}
 
 		try {
-			return wxcpt.DecryptMsg(signature.trim(), timestamp.trim(), nonce.trim(), data.trim());
+			return (Content) XmlUtil.parse(
+				wxcpt.DecryptMsg(signature.trim(), timestamp.trim(), nonce.trim(), data.trim()), new Content());
 		} catch (AesException e) {
+			logger.error(e);
+
+			throw new RuntimeException(e.getMessage());
+		} catch (Exception e) {
 			logger.error(e);
 
 			throw new RuntimeException(e.getMessage());

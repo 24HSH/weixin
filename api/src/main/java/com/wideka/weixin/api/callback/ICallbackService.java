@@ -1,4 +1,6 @@
-package com.wideka.weixin.api.suite;
+package com.wideka.weixin.api.callback;
+
+import com.wideka.weixin.api.callback.bo.Content;
 
 /**
  * 
@@ -36,7 +38,7 @@ public interface ICallbackService {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	String callback(String token, String encodingAesKey, String corpId, String signature, String timestamp,
+	Content callback(String token, String encodingAesKey, String corpId, String signature, String timestamp,
 		String nonce, String data) throws RuntimeException;
 
 	/**
