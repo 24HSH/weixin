@@ -13,6 +13,8 @@ import org.dom4j.VisitorSupport;
  */
 public class Content extends VisitorSupport {
 
+	private Long id;
+
 	/**
 	 * 企业号CorpID.
 	 */
@@ -26,7 +28,7 @@ public class Content extends VisitorSupport {
 	/**
 	 * 消息创建时间（整型）.
 	 */
-	private String createTime;
+	private int createTime;
 
 	/**
 	 * 消息类型.
@@ -36,12 +38,12 @@ public class Content extends VisitorSupport {
 	/**
 	 * 消息id，64位整型.
 	 */
-	private String msgId;
+	private long msgId;
 
 	/**
 	 * 企业应用的id，整型。可在应用的设置页面查看.
 	 */
-	private String agentId;
+	private int agentId;
 
 	// >>>>>>>>>>以下是 接收普通消息 属性<<<<<<<<<<
 
@@ -208,13 +210,13 @@ public class Content extends VisitorSupport {
 		} else if ("FromUserName".equals(name)) {
 			fromUserName = text;
 		} else if ("CreateTime".equals(name)) {
-			createTime = text;
+			createTime = Integer.parseInt(text);
 		} else if ("MsgType".equals(name)) {
 			msgType = text;
 		} else if ("MsgId".equals(name)) {
-			msgId = text;
+			msgId = Long.parseLong(text);
 		} else if ("AgentID".equals(name)) {
-			agentId = text;
+			agentId = Integer.parseInt(text);
 		} else if ("Content".equals(name)) {
 			content = text;
 		} else if ("PicUrl".equals(name)) {
@@ -264,6 +266,14 @@ public class Content extends VisitorSupport {
 		}
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getToUserName() {
 		return toUserName;
 	}
@@ -280,11 +290,11 @@ public class Content extends VisitorSupport {
 		this.fromUserName = fromUserName;
 	}
 
-	public String getCreateTime() {
+	public int getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(int createTime) {
 		this.createTime = createTime;
 	}
 
@@ -296,19 +306,19 @@ public class Content extends VisitorSupport {
 		this.msgType = msgType;
 	}
 
-	public String getMsgId() {
+	public long getMsgId() {
 		return msgId;
 	}
 
-	public void setMsgId(String msgId) {
+	public void setMsgId(long msgId) {
 		this.msgId = msgId;
 	}
 
-	public String getAgentId() {
+	public int getAgentId() {
 		return agentId;
 	}
 
-	public void setAgentId(String agentId) {
+	public void setAgentId(int agentId) {
 		this.agentId = agentId;
 	}
 
