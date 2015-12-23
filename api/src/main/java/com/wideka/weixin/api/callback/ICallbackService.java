@@ -43,6 +43,20 @@ public interface ICallbackService {
 
 	/**
 	 * 
+	 * @param token
+	 * @param encodingAesKey
+	 * @param corpId
+	 * @param data
+	 * @param timestamp
+	 * @param nonce
+	 * @return
+	 * @throws RuntimeException
+	 */
+	String callback(String token, String encodingAesKey, String corpId, String data, String timestamp, String nonce)
+		throws RuntimeException;
+
+	/**
+	 * 
 	 * @param accessToken
 	 *            调用接口凭证.
 	 * @return

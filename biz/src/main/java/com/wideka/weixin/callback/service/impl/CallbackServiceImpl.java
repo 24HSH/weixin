@@ -112,6 +112,34 @@ public class CallbackServiceImpl implements ICallbackService {
 	}
 
 	@Override
+	public String callback(String token, String encodingAesKey, String corpId, String data, String timestamp,
+		String nonce) throws RuntimeException {
+		if (StringUtils.isBlank(data)) {
+			throw new RuntimeException("data cannot be null.");
+		}
+
+		validate(token, encodingAesKey, corpId, "signature", timestamp, nonce);
+
+		WXBizMsgCrypt wxcpt = null;
+
+		try {
+			wxcpt = new WXBizMsgCrypt(token.trim(), encodingAesKey.trim(), corpId.trim());
+		} catch (AesException e) {
+			logger.error(e);
+
+			throw new RuntimeException(e.getMessage());
+		}
+
+		try {
+			return wxcpt.EncryptMsg(data.trim(), timestamp.trim(), nonce.trim());
+		} catch (AesException e) {
+			logger.error(e);
+
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+
+	@Override
 	public String[] getCallbackIP(String accessToken) throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
