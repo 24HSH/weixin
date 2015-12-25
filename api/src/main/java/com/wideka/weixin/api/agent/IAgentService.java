@@ -14,6 +14,9 @@ public interface IAgentService {
 
 	String HTTPS_SET_AGENT_URL = "https://qyapi.weixin.qq.com/cgi-bin/service/set_agent?suite_access_token=";
 
+	String HTTPS_GET_URL =
+		"https://qyapi.weixin.qq.com/cgi-bin/agent/get?access_token=$ACCESS_TOKEN$&agentid=$AGENTID$";
+
 	/**
 	 * 
 	 * @param suiteAccessToken
@@ -39,5 +42,14 @@ public interface IAgentService {
 	 */
 	Result setAgent(String suiteAccessToken, String suiteId, String authCorpId, String permanentCode, Agent agent)
 		throws RuntimeException;
+
+	/**
+	 * 
+	 * @param accessToken
+	 * @param agentId
+	 * @return
+	 * @throws RuntimeException
+	 */
+	Agent getAgent(String accessToken, String agentId) throws RuntimeException;
 
 }

@@ -122,4 +122,39 @@ public class AgentServiceImpl implements IAgentService {
 		return result;
 	}
 
+	@Override
+	public Agent getAgent(String accessToken, String agentId) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(agentId)) {
+			throw new RuntimeException("agentid cannot be null.");
+		}
+
+		Agent agent = null;
+
+		try {
+			agent =
+				JSON.parseObject(
+					HttpUtil.get(IAgentService.HTTPS_GET_URL.replace("$ACCESS_TOKEN$", accessToken.trim()).replace(
+						"$AGENTID$", agentId.trim())), Agent.class);
+		} catch (Exception e) {
+			logger.error(accessToken + "&" + agentId, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (agent == null) {
+			throw new RuntimeException("agent is null.");
+		}
+
+		String errCode = agent.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(agent.getErrMsg());
+		}
+
+		return agent;
+	}
+
 }
