@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.weixin.api.menu.IMenuService;
 import com.wideka.weixin.api.menu.bo.Menu;
+import com.wideka.weixin.api.menu.bo.MenuObject;
 
 /**
  * 
@@ -27,29 +28,29 @@ public class MenuServiceImpl implements IMenuService {
 			throw new RuntimeException("agentid cannot be null.");
 		}
 
-		Menu menu = null;
+		MenuObject menuObject = null;
 
 		try {
-			menu =
+			menuObject =
 				JSON.parseObject(
 					HttpUtil.get(IMenuService.HTTPS_GET_URL.replace("$ACCESS_TOKEN$", accessToken.trim()).replace(
-						"$AGENTID$", agentId.trim())), Menu.class);
+						"$AGENTID$", agentId.trim())), MenuObject.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + agentId, e);
 
 			throw new RuntimeException("HttpUtil error.", e);
 		}
 
-		if (menu == null) {
+		if (menuObject == null || menuObject.getMenu() == null) {
 			throw new RuntimeException("menu is null.");
 		}
 
-		String errCode = menu.getErrCode();
+		String errCode = menuObject.getErrCode();
 		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
-			throw new RuntimeException(menu.getErrMsg());
+			throw new RuntimeException(menuObject.getErrMsg());
 		}
 
-		return menu;
+		return menuObject.getMenu();
 	}
 
 }

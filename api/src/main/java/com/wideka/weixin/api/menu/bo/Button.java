@@ -17,21 +17,25 @@ public class Button implements Serializable {
 	/**
 	 * 菜单的响应动作类型.
 	 */
+	@JSONField(name = "type")
 	private String type;
 
 	/**
 	 * 菜单标题，不超过16个字节，子菜单不超过40个字节.
 	 */
+	@JSONField(name = "name")
 	private String name;
 
 	/**
 	 * 菜单KEY值，用于消息接口推送，不超过128字节.
 	 */
+	@JSONField(name = "key")
 	private String key;
 
 	/**
 	 * 网页链接，成员点击菜单可打开链接，不超过256字节.
 	 */
+	@JSONField(name = "url")
 	private String url;
 
 	/**

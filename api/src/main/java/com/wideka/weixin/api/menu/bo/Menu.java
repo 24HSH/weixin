@@ -1,16 +1,16 @@
 package com.wideka.weixin.api.menu.bo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.wideka.weixin.framework.bo.Result;
 
 /**
  * 
  * @author JiakunXu
  * 
  */
-public class Menu extends Result {
+public class Menu implements Serializable {
 
 	private static final long serialVersionUID = 5248355303376072657L;
 
