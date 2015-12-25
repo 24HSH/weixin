@@ -40,7 +40,7 @@ public class MaterialServiceImpl implements IMaterialService {
 		}
 
 		if (materialCount == null) {
-			throw new RuntimeException("access_token is null.");
+			throw new RuntimeException("material_count is null.");
 		}
 
 		String errCode = materialCount.getErrCode();
