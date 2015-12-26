@@ -1,5 +1,7 @@
 package com.wideka.weixin.agent.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -8,6 +10,7 @@ import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.agent.IAgentService;
 import com.wideka.weixin.api.agent.bo.Agent;
+import com.wideka.weixin.api.agent.bo.AgentObject;
 import com.wideka.weixin.api.suite.bo.SuiteExtend;
 import com.wideka.weixin.framework.bo.Result;
 
@@ -157,4 +160,32 @@ public class AgentServiceImpl implements IAgentService {
 		return agent;
 	}
 
+	@Override
+	public List<Agent> getAgentList(String accessToken) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		AgentObject agentObject = null;
+
+		try {
+			agentObject =
+				JSON.parseObject(HttpUtil.get(IAgentService.HTTPS_LIST_URL + accessToken.trim()), AgentObject.class);
+		} catch (Exception e) {
+			logger.error(accessToken, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (agentObject == null || agentObject.getAgentList() == null || agentObject.getAgentList().size() == 0) {
+			throw new RuntimeException("agent is null.");
+		}
+
+		String errCode = agentObject.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(agentObject.getErrMsg());
+		}
+
+		return agentObject.getAgentList();
+	}
 }

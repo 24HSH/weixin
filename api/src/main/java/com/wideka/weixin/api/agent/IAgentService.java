@@ -1,5 +1,7 @@
 package com.wideka.weixin.api.agent;
 
+import java.util.List;
+
 import com.wideka.weixin.api.agent.bo.Agent;
 import com.wideka.weixin.framework.bo.Result;
 
@@ -16,6 +18,8 @@ public interface IAgentService {
 
 	String HTTPS_GET_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/agent/get?access_token=$ACCESS_TOKEN$&agentid=$AGENTID$";
+
+	String HTTPS_LIST_URL = "https://qyapi.weixin.qq.com/cgi-bin/agent/list?access_token=";
 
 	/**
 	 * 
@@ -51,5 +55,13 @@ public interface IAgentService {
 	 * @throws RuntimeException
 	 */
 	Agent getAgent(String accessToken, String agentId) throws RuntimeException;
+
+	/**
+	 * 
+	 * @param accessToken
+	 * @return
+	 * @throws RuntimeException
+	 */
+	List<Agent> getAgentList(String accessToken) throws RuntimeException;
 
 }
