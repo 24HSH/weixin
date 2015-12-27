@@ -1,6 +1,7 @@
 package com.wideka.weixin.api.user;
 
 import com.wideka.weixin.api.user.bo.User;
+import com.wideka.weixin.framework.bo.Result;
 
 /**
  * 
@@ -12,6 +13,9 @@ public interface IUserInfoService {
 	String HTTPS_USER_INFO_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=$ACCESS_TOKEN$&code=$CODE$";
 
+	String HTTPS_AUTH_SUCC_URL =
+		"https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=$ACCESS_TOKEN$&userid=$USERID$";
+
 	/**
 	 * 
 	 * @param accessToken
@@ -22,5 +26,14 @@ public interface IUserInfoService {
 	 * @throws RuntimeException
 	 */
 	User getUserInfo(String accessToken, String code) throws RuntimeException;
+
+	/**
+	 * 
+	 * @param accessToken
+	 * @param userId
+	 * @return
+	 * @throws RuntimeException
+	 */
+	Result authSucc(String accessToken, String userId) throws RuntimeException;
 
 }
