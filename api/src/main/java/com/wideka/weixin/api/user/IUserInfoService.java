@@ -16,6 +16,8 @@ public interface IUserInfoService {
 	String HTTPS_AUTH_SUCC_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=$ACCESS_TOKEN$&userid=$USERID$";
 
+	String HTTPS_CREATE_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token=";
+
 	/**
 	 * 
 	 * @param accessToken
@@ -35,5 +37,13 @@ public interface IUserInfoService {
 	 * @throws RuntimeException
 	 */
 	Result authSucc(String accessToken, String userId) throws RuntimeException;
+
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 * @throws RuntimeException
+	 */
+	Result createUser(User user) throws RuntimeException;
 
 }

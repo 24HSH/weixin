@@ -86,4 +86,10 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		return result;
 	}
 
+	@Override
+	public Result createUser(User user) throws RuntimeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
