@@ -18,6 +18,11 @@ public interface IUserInfoService {
 
 	String HTTPS_CREATE_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token=";
 
+	String HTTPS_UPDATE_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/update?access_token=";
+
+	String HTTPS_DELETE_URL =
+		"https://qyapi.weixin.qq.com/cgi-bin/user/delete?access_token=$ACCESS_TOKEN$&userid=$USERID$";
+
 	/**
 	 * 
 	 * @param accessToken
@@ -39,11 +44,35 @@ public interface IUserInfoService {
 	Result authSucc(String accessToken, String userId) throws RuntimeException;
 
 	/**
+	 * 创建成员.
 	 * 
+	 * @param accessToken
 	 * @param user
 	 * @return
 	 * @throws RuntimeException
 	 */
-	Result createUser(User user) throws RuntimeException;
+	Result createUser(String accessToken, User user) throws RuntimeException;
+
+	/**
+	 * 更新成员.
+	 * 
+	 * @param accessToken
+	 * @param user
+	 * @return
+	 * @throws RuntimeException
+	 */
+	Result updateUser(String accessToken, User user) throws RuntimeException;
+
+	/**
+	 * 删除成员.
+	 * 
+	 * @param accessToken
+	 *            调用接口凭证.
+	 * @param userId
+	 *            成员UserID。对应管理端的帐号.
+	 * @return
+	 * @throws RuntimeException
+	 */
+	Result deleteUser(String accessToken, String userId) throws RuntimeException;
 
 }
