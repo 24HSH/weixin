@@ -31,6 +31,12 @@ public class Department extends Result {
 	private int parentId;
 
 	/**
+	 * 在父部门中的次序值。order值小的排序靠前。.
+	 */
+	@JSONField(name = "order")
+	private int order;
+
+	/**
 	 * 是否具有该部门的写权限.
 	 */
 	@JSONField(name = "writable")
@@ -58,6 +64,14 @@ public class Department extends Result {
 
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 	public String getWritable() {
