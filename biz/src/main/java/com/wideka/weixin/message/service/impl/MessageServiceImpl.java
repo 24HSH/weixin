@@ -27,7 +27,7 @@ public class MessageServiceImpl implements IMessageService {
 	private static Logger logger = Logger.getLogger(MessageServiceImpl.class);
 
 	private SendResult send(String accessToken, Message message) throws RuntimeException {
-		SendResult result = new SendResult();
+		SendResult result = null;
 
 		try {
 			result =
