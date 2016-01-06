@@ -5,8 +5,12 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.wideka.club.framework.util.HttpUtil;
+import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.material.IMaterialService;
 import com.wideka.weixin.api.material.bo.MaterialCount;
+import com.wideka.weixin.api.material.bo.MaterialMPNews;
+import com.wideka.weixin.api.material.bo.MaterialResult;
+import com.wideka.weixin.api.message.bo.MPNews;
 
 /**
  * 
@@ -16,6 +20,45 @@ import com.wideka.weixin.api.material.bo.MaterialCount;
 public class MaterialServiceImpl implements IMaterialService {
 
 	private static Logger logger = Logger.getLogger(MaterialServiceImpl.class);
+
+	@Override
+	public MaterialResult addMPNews(String accessToken, int agentId, MPNews mpNews) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (mpNews == null) {
+			throw new RuntimeException("mpnews cannot be null.");
+		}
+
+		MaterialMPNews materialMPNews = new MaterialMPNews();
+		materialMPNews.setAgentId(agentId);
+		materialMPNews.setMpNews(mpNews);
+
+		MaterialResult result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.post(IMaterialService.HTTPS_ADD_MPNEWS_URL + accessToken.trim(),
+						JSON.toJSONString(materialMPNews)), MaterialResult.class);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(materialMPNews), e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
+	}
 
 	@Override
 	public MaterialCount getCount(String accessToken, String agentId) throws RuntimeException {
