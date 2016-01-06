@@ -1,15 +1,14 @@
 package com.wideka.weixin.api.department.bo;
 
-import java.io.Serializable;
-
 import com.alibaba.fastjson.annotation.JSONField;
+import com.wideka.weixin.framework.bo.Result;
 
 /**
  * 
  * @author JiakunXu
  * 
  */
-public class Department implements Serializable {
+public class Department extends Result {
 
 	private static final long serialVersionUID = -5626022927247301256L;
 
