@@ -60,6 +60,41 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	@Override
+	public Result deleteMenu(String accessToken, String agentId) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(agentId)) {
+			throw new RuntimeException("agentid cannot be null.");
+		}
+
+		Result result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.get(IMenuService.HTTPS_DELETE_URL.replace("$ACCESS_TOKEN$", accessToken.trim()).replace(
+						"$AGENTID$", agentId.trim())), Result.class);
+		} catch (Exception e) {
+			logger.error(accessToken + "&" + agentId, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
+	}
+
+	@Override
 	public Menu getMenu(String accessToken, String agentId) throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
