@@ -17,6 +17,9 @@ public class MaterialMPNews implements Serializable {
 	@JSONField(name = "agentid")
 	private int agentId;
 
+	@JSONField(name = "media_id")
+	private String mediaId;
+
 	@JSONField(name = "mpnews")
 	private MPNews mpNews;
 
@@ -26,6 +29,14 @@ public class MaterialMPNews implements Serializable {
 
 	public void setAgentId(int agentId) {
 		this.agentId = agentId;
+	}
+
+	public String getMediaId() {
+		return mediaId;
+	}
+
+	public void setMediaId(String mediaId) {
+		this.mediaId = mediaId;
 	}
 
 	public MPNews getMpNews() {

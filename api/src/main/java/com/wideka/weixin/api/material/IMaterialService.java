@@ -23,6 +23,8 @@ public interface IMaterialService {
 	String HTTPS_DEL_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/material/del?access_token=$ACCESS_TOKEN$&agentid=$AGENTID$&media_id=$MEDIA_ID$";
 
+	String HTTPS_UPDATE_MPNEWS_URL = "https://qyapi.weixin.qq.com/cgi-bin/material/update_mpnews?access_token=";
+
 	String HTTPS_GET_COUNT_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/material/get_count?access_token=$ACCESS_TOKEN$&agentid=$AGENTID$";
 
@@ -45,6 +47,17 @@ public interface IMaterialService {
 	 * @throws RuntimeException
 	 */
 	Result deleteMaterial(String accessToken, String agentId, String mediaId) throws RuntimeException;
+
+	/**
+	 * 
+	 * @param accessToken
+	 * @param agentId
+	 * @param mediaId
+	 * @param mpNews
+	 * @return
+	 * @throws RuntimeException
+	 */
+	Result updateMPNews(String accessToken, int agentId, String mediaId, MPNews mpNews) throws RuntimeException;
 
 	/**
 	 * 本接口可以获取应用素材总数以及每种类型素材的数目.
