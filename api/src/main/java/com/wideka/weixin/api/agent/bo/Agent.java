@@ -104,6 +104,12 @@ public class Agent extends Result {
 	@JSONField(name = "isreportenter")
 	private int isReportEnter;
 
+	/**
+	 * 主页型应用url。url必须以http或者https开头。消息型应用无需该参数.
+	 */
+	@JSONField(name = "home_url")
+	private String homeUrl;
+
 	public int getAgentId() {
 		return agentId;
 	}
@@ -222,6 +228,14 @@ public class Agent extends Result {
 
 	public void setIsReportEnter(int isReportEnter) {
 		this.isReportEnter = isReportEnter;
+	}
+
+	public String getHomeUrl() {
+		return homeUrl;
+	}
+
+	public void setHomeUrl(String homeUrl) {
+		this.homeUrl = homeUrl;
 	}
 
 }
