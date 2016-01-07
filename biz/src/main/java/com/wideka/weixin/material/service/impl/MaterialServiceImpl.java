@@ -8,8 +8,10 @@ import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.material.IMaterialService;
 import com.wideka.weixin.api.material.bo.MaterialCount;
+import com.wideka.weixin.api.material.bo.MaterialList;
 import com.wideka.weixin.api.material.bo.MaterialMPNews;
 import com.wideka.weixin.api.material.bo.MaterialResult;
+import com.wideka.weixin.api.material.bo.Parameter;
 import com.wideka.weixin.api.message.bo.MPNews;
 import com.wideka.weixin.framework.bo.Result;
 
@@ -176,6 +178,48 @@ public class MaterialServiceImpl implements IMaterialService {
 		}
 
 		return materialCount;
+	}
+
+	@Override
+	public MaterialList batchGet(String accessToken, String type, int agentId, int offset, int count)
+		throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(type)) {
+			throw new RuntimeException("type cannot be null.");
+		}
+
+		Parameter parameter = new Parameter();
+		parameter.setType(type.trim());
+		parameter.setAgentId(agentId);
+		parameter.setOffset(offset);
+		parameter.setCount(count);
+
+		MaterialList result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.post(IMaterialService.HTTPS_BATCH_GET_URL + accessToken.trim(),
+						JSON.toJSONString(parameter)), MaterialList.class);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(parameter), e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
 	}
 
 }

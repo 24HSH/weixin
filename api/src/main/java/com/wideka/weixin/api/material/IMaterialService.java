@@ -1,6 +1,7 @@
 package com.wideka.weixin.api.material;
 
 import com.wideka.weixin.api.material.bo.MaterialCount;
+import com.wideka.weixin.api.material.bo.MaterialList;
 import com.wideka.weixin.api.material.bo.MaterialResult;
 import com.wideka.weixin.api.message.bo.MPNews;
 import com.wideka.weixin.framework.bo.Result;
@@ -27,6 +28,8 @@ public interface IMaterialService {
 
 	String HTTPS_GET_COUNT_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/material/get_count?access_token=$ACCESS_TOKEN$&agentid=$AGENTID$";
+
+	String HTTPS_BATCH_GET_URL = "https://qyapi.weixin.qq.com/cgi-bin/material/batchget?access_token=";
 
 	/**
 	 * 
@@ -70,5 +73,18 @@ public interface IMaterialService {
 	 * @throws RuntimeException
 	 */
 	MaterialCount getCount(String accessToken, String agentId) throws RuntimeException;
+
+	/**
+	 * 本接口可以获取应用素材素材列表。.
+	 * 
+	 * @param accessToken
+	 * @param type
+	 * @param agentId
+	 * @param offset
+	 * @param count
+	 * @return
+	 * @throws RuntimeException
+	 */
+	MaterialList batchGet(String accessToken, String type, int agentId, int offset, int count) throws RuntimeException;
 
 }
