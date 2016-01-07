@@ -1,6 +1,7 @@
 package com.wideka.weixin.api.menu;
 
 import com.wideka.weixin.api.menu.bo.Menu;
+import com.wideka.weixin.framework.bo.Result;
 
 /**
  * 
@@ -9,7 +10,20 @@ import com.wideka.weixin.api.menu.bo.Menu;
  */
 public interface IMenuService {
 
+	String HTTPS_CREATE_URL =
+		"https://qyapi.weixin.qq.com/cgi-bin/menu/create?access_token=$ACCESS_TOKEN$&agentid=$AGENTID$";
+
 	String HTTPS_GET_URL = "https://qyapi.weixin.qq.com/cgi-bin/menu/get?access_token=$ACCESS_TOKEN$&agentid=$AGENTID$";
+
+	/**
+	 * 
+	 * @param accessToken
+	 * @param agentId
+	 * @param menu
+	 * @return
+	 * @throws RuntimeException
+	 */
+	Result createMenu(String accessToken, String agentId, Menu menu) throws RuntimeException;
 
 	/**
 	 * 

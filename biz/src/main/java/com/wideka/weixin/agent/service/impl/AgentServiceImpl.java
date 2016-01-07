@@ -187,12 +187,12 @@ public class AgentServiceImpl implements IAgentService {
 			throw new RuntimeException("result is null.");
 		}
 
-		String errCode = agent.getErrCode();
+		String errCode = result.getErrCode();
 		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
-			throw new RuntimeException(agent.getErrMsg());
+			throw new RuntimeException(result.getErrMsg());
 		}
 
-		return agent;
+		return result;
 	}
 
 	@Override
