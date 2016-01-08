@@ -39,6 +39,9 @@ public class TagResult extends Result {
 	@JSONField(name = "invalidparty")
 	private String invalidParty;
 
+	@JSONField(name = "taglist")
+	private List<Tag> tagList;
+
 	public List<User> getUserList() {
 		return userList;
 	}
@@ -69,6 +72,14 @@ public class TagResult extends Result {
 
 	public void setInvalidParty(String invalidParty) {
 		this.invalidParty = invalidParty;
+	}
+
+	public List<Tag> getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(List<Tag> tagList) {
+		this.tagList = tagList;
 	}
 
 }

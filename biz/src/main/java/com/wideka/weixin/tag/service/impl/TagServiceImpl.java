@@ -232,4 +232,32 @@ public class TagServiceImpl implements ITagService {
 		return result;
 	}
 
+	@Override
+	public TagResult getTagList(String accessToken) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		TagResult result = null;
+
+		try {
+			result = JSON.parseObject(HttpUtil.get(ITagService.HTTPS_LIST_URL + accessToken.trim()), TagResult.class);
+		} catch (Exception e) {
+			logger.error(accessToken, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
+	}
+
 }
