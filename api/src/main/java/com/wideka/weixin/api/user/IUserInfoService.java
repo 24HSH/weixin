@@ -31,6 +31,9 @@ public interface IUserInfoService {
 	String HTTPS_SIMPLE_LIST_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/user/simplelist?access_token=$ACCESS_TOKEN$&department_id=$DEPARTMENT_ID$&fetch_child=$FETCH_CHILD$&status=$STATUS$";
 
+	String HTTPS_LIST_URL =
+		"https://qyapi.weixin.qq.com/cgi-bin/user/list?access_token=$ACCESS_TOKEN$&department_id=$DEPARTMENT_ID$&fetch_child=$FETCH_CHILD$&status=$STATUS$";
+
 	/**
 	 * 
 	 * @param accessToken
@@ -105,6 +108,17 @@ public interface IUserInfoService {
 
 	/**
 	 * 获取部门成员.
+	 * 
+	 * @param accessToken
+	 * @param departmentId
+	 * @param fetchChild
+	 * @param status
+	 * @return
+	 */
+	UserResult getSimpleUserList(String accessToken, String departmentId, String fetchChild, String status);
+
+	/**
+	 * 获取部门成员(详情).
 	 * 
 	 * @param accessToken
 	 * @param departmentId
