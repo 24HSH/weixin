@@ -25,6 +25,8 @@ public interface IUserInfoService {
 
 	String HTTPS_BATCH_DELETE_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/batchdelete?access_token=";
 
+	String HTTPS_GET_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=$ACCESS_TOKEN$&userid=$USERID$";
+
 	/**
 	 * 
 	 * @param accessToken
@@ -86,5 +88,15 @@ public interface IUserInfoService {
 	 * @throws RuntimeException
 	 */
 	Result batchDeleteUser(String accessToken, String[] userIdList) throws RuntimeException;
+
+	/**
+	 * 获取成员.
+	 * 
+	 * @param accessToken
+	 * @param userId
+	 * @return
+	 * @throws RuntimeException
+	 */
+	User getUser(String accessToken, String userId) throws RuntimeException;
 
 }
