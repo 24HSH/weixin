@@ -9,6 +9,7 @@ import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.user.IUserInfoService;
 import com.wideka.weixin.api.user.bo.User;
 import com.wideka.weixin.api.user.bo.UserObject;
+import com.wideka.weixin.api.user.bo.UserResult;
 import com.wideka.weixin.framework.bo.Result;
 
 /**
@@ -249,6 +250,50 @@ public class UserInfoServiceImpl implements IUserInfoService {
 						"$USERID$", userId.trim())), User.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + userId, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
+	}
+
+	@Override
+	public UserResult getUserList(String accessToken, String departmentId, String fetchChild, String status) {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(departmentId)) {
+			throw new RuntimeException("department_id cannot be null.");
+		}
+
+		if (StringUtils.isBlank(fetchChild)) {
+			throw new RuntimeException("fetch_child cannot be null.");
+		}
+
+		if (StringUtils.isBlank(status)) {
+			throw new RuntimeException("status cannot be null.");
+		}
+
+		UserResult result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.get(IUserInfoService.HTTPS_GET_URL.replace("$ACCESS_TOKEN$", accessToken.trim())
+						.replace("$DEPARTMENT_ID$", departmentId.trim()).replace("$FETCH_CHILD$", fetchChild.trim())
+						.replace("$STATUS$", status.trim())), UserResult.class);
+		} catch (Exception e) {
+			logger.error(accessToken + "&" + departmentId + "&" + fetchChild + "&" + status, e);
 
 			throw new RuntimeException("HttpUtil error.", e);
 		}

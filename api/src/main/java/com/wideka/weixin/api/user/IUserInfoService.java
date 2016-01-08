@@ -1,6 +1,7 @@
 package com.wideka.weixin.api.user;
 
 import com.wideka.weixin.api.user.bo.User;
+import com.wideka.weixin.api.user.bo.UserResult;
 import com.wideka.weixin.framework.bo.Result;
 
 /**
@@ -26,6 +27,9 @@ public interface IUserInfoService {
 	String HTTPS_BATCH_DELETE_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/batchdelete?access_token=";
 
 	String HTTPS_GET_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=$ACCESS_TOKEN$&userid=$USERID$";
+
+	String HTTPS_SIMPLE_LIST_URL =
+		"https://qyapi.weixin.qq.com/cgi-bin/user/simplelist?access_token=$ACCESS_TOKEN$&department_id=$DEPARTMENT_ID$&fetch_child=$FETCH_CHILD$&status=$STATUS$";
 
 	/**
 	 * 
@@ -98,5 +102,16 @@ public interface IUserInfoService {
 	 * @throws RuntimeException
 	 */
 	User getUser(String accessToken, String userId) throws RuntimeException;
+
+	/**
+	 * 获取部门成员.
+	 * 
+	 * @param accessToken
+	 * @param departmentId
+	 * @param fetchChild
+	 * @param status
+	 * @return
+	 */
+	UserResult getUserList(String accessToken, String departmentId, String fetchChild, String status);
 
 }
