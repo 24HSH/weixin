@@ -8,6 +8,7 @@ import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.user.IUserInfoService;
 import com.wideka.weixin.api.user.bo.User;
+import com.wideka.weixin.api.user.bo.UserObject;
 import com.wideka.weixin.framework.bo.Result;
 
 /**
@@ -175,6 +176,44 @@ public class UserInfoServiceImpl implements IUserInfoService {
 					accessToken.trim()).replace("$USERID$", userId.trim())), Result.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + userId, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
+	}
+
+	@Override
+	public Result batchDeleteUser(String accessToken, String[] userIdList) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (userIdList == null || userIdList.length == 0) {
+			throw new RuntimeException("userIdList cannot be null.");
+		}
+
+		UserObject userObject = new UserObject();
+		userObject.setUserIdList(userIdList);
+
+		Result result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.post(IUserInfoService.HTTPS_BATCH_DELETE_URL + accessToken.trim(),
+						JSON.toJSONString(userObject)), Result.class);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(userObject), e);
 
 			throw new RuntimeException("HttpUtil error.", e);
 		}
