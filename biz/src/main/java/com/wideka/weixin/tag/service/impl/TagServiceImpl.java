@@ -161,7 +161,7 @@ public class TagServiceImpl implements ITagService {
 	}
 
 	@Override
-	public TagResult addTagUsers(String accessToken, String tagId, TagObject tagObject) {
+	public TagResult addTagUsers(String accessToken, String tagId, TagObject tagObject) throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
 		}
@@ -182,6 +182,42 @@ public class TagServiceImpl implements ITagService {
 			result =
 				JSON.parseObject(
 					HttpUtil.post(ITagService.HTTPS_ADD_TAG_USERS_URL + accessToken.trim(),
+						JSON.toJSONString(tagObject)), TagResult.class);
+		} catch (Exception e) {
+			logger.error(LogUtil.parserBean(tagObject), e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		return result;
+	}
+
+	@Override
+	public TagResult delTagUsers(String accessToken, String tagId, TagObject tagObject) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(tagId)) {
+			throw new RuntimeException("tagid cannot be null.");
+		}
+
+		if (tagObject == null) {
+			throw new RuntimeException("tagObject cannot be null.");
+		}
+
+		tagObject.setTagId(tagId.trim());
+
+		TagResult result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.post(ITagService.HTTPS_DEL_TAG_USERS_URL + accessToken.trim(),
 						JSON.toJSONString(tagObject)), TagResult.class);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(tagObject), e);

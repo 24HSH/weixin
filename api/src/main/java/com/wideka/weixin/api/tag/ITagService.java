@@ -23,6 +23,8 @@ public interface ITagService {
 
 	String HTTPS_ADD_TAG_USERS_URL = "https://qyapi.weixin.qq.com/cgi-bin/tag/addtagusers?access_token=";
 
+	String HTTPS_DEL_TAG_USERS_URL = "https://qyapi.weixin.qq.com/cgi-bin/tag/deltagusers?access_token=";
+
 	/**
 	 * 创建标签.
 	 * 
@@ -71,6 +73,17 @@ public interface ITagService {
 	 * @param tagObject
 	 * @return
 	 */
-	TagResult addTagUsers(String accessToken, String tagId, TagObject tagObject);
+	TagResult addTagUsers(String accessToken, String tagId, TagObject tagObject) throws RuntimeException;
+
+	/**
+	 * 删除标签成员.
+	 * 
+	 * @param accessToken
+	 * @param tagId
+	 * @param tagObject
+	 * @return
+	 * @throws RuntimeException
+	 */
+	TagResult delTagUsers(String accessToken, String tagId, TagObject tagObject) throws RuntimeException;
 
 }
