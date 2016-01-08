@@ -1,6 +1,7 @@
 package com.wideka.weixin.api.tag;
 
 import com.wideka.weixin.api.tag.bo.Tag;
+import com.wideka.weixin.api.tag.bo.TagObject;
 import com.wideka.weixin.api.tag.bo.TagResult;
 import com.wideka.weixin.framework.bo.Result;
 
@@ -19,6 +20,8 @@ public interface ITagService {
 		"https://qyapi.weixin.qq.com/cgi-bin/tag/delete?access_token=$ACCESS_TOKEN$&tagid=$TAGID$";
 
 	String HTTPS_GET_URL = "https://qyapi.weixin.qq.com/cgi-bin/tag/get?access_token=$ACCESS_TOKEN$&tagid=$TAGID$";
+
+	String HTTPS_ADD_TAG_USERS_URL = "https://qyapi.weixin.qq.com/cgi-bin/tag/addtagusers?access_token=";
 
 	/**
 	 * 创建标签.
@@ -59,5 +62,15 @@ public interface ITagService {
 	 * @throws RuntimeException
 	 */
 	TagResult getTag(String accessToken, String tagId) throws RuntimeException;
+
+	/**
+	 * 增加标签成员.
+	 * 
+	 * @param accessToken
+	 * @param tagId
+	 * @param tagObject
+	 * @return
+	 */
+	TagResult addTagUsers(String accessToken, String tagId, TagObject tagObject);
 
 }

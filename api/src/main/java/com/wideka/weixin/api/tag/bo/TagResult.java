@@ -27,6 +27,18 @@ public class TagResult extends Result {
 	@JSONField(name = "partylist")
 	private int[] partyList;
 
+	/**
+	 * 不在权限内的成员ID列表，以“|”分隔.
+	 */
+	@JSONField(name = "invalidlist")
+	private String invalidList;
+
+	/**
+	 * 不在权限内的部门ID列表.
+	 */
+	@JSONField(name = "invalidparty")
+	private String invalidParty;
+
 	public List<User> getUserList() {
 		return userList;
 	}
@@ -41,6 +53,22 @@ public class TagResult extends Result {
 
 	public void setPartyList(int[] partyList) {
 		this.partyList = partyList;
+	}
+
+	public String getInvalidList() {
+		return invalidList;
+	}
+
+	public void setInvalidList(String invalidList) {
+		this.invalidList = invalidList;
+	}
+
+	public String getInvalidParty() {
+		return invalidParty;
+	}
+
+	public void setInvalidParty(String invalidParty) {
+		this.invalidParty = invalidParty;
 	}
 
 }
