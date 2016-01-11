@@ -20,12 +20,26 @@ public class UserResult extends Result {
 	@JSONField(name = "userlist")
 	private List<User> userList;
 
+	/**
+	 * 1:微信邀请 2.邮件邀请.
+	 */
+	@JSONField(name = "type")
+	private String type;
+
 	public List<User> getUserList() {
 		return userList;
 	}
 
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
