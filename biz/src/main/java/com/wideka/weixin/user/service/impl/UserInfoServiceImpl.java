@@ -267,7 +267,8 @@ public class UserInfoServiceImpl implements IUserInfoService {
 	}
 
 	@Override
-	public UserResult getSimpleUserList(String accessToken, String departmentId, String fetchChild, String status) {
+	public UserResult getSimpleUserList(String accessToken, String departmentId, String fetchChild, String status)
+		throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
 		}
@@ -311,7 +312,8 @@ public class UserInfoServiceImpl implements IUserInfoService {
 	}
 
 	@Override
-	public UserResult getUserList(String accessToken, String departmentId, String fetchChild, String status) {
+	public UserResult getUserList(String accessToken, String departmentId, String fetchChild, String status)
+		throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
 		}
@@ -354,4 +356,41 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		return result;
 	}
 
+	@Override
+	public UserResult inviteUser(String accessToken, String userId) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(userId)) {
+			throw new RuntimeException("userid cannot be null.");
+		}
+
+		User user = new User();
+		user.setUserId(userId.trim());
+
+		UserResult result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.post(IUserInfoService.HTTPS_INVITE_URL + accessToken.trim(), JSON.toJSONString(user)),
+					UserResult.class);
+		} catch (Exception e) {
+			logger.error(accessToken + "&" + userId, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
+	}
 }
