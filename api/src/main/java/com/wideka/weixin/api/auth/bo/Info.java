@@ -3,7 +3,7 @@ package com.wideka.weixin.api.auth.bo;
 import java.io.Serializable;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.wideka.weixin.api.corp.bo.AuthCorpInfo;
+import com.wideka.weixin.api.corp.bo.Corp;
 
 /**
  * 
@@ -18,7 +18,7 @@ public class Info implements Serializable {
 	 * 授权方企业信息.
 	 */
 	@JSONField(name = "auth_corp_info")
-	private AuthCorpInfo authCorpInfo;
+	private Corp authCorpInfo;
 
 	/**
 	 * 授权信息.
@@ -26,11 +26,11 @@ public class Info implements Serializable {
 	@JSONField(name = "auth_info")
 	private AuthInfo authInfo;
 
-	public AuthCorpInfo getAuthCorpInfo() {
+	public Corp getAuthCorpInfo() {
 		return authCorpInfo;
 	}
 
-	public void setAuthCorpInfo(AuthCorpInfo authCorpInfo) {
+	public void setAuthCorpInfo(Corp authCorpInfo) {
 		this.authCorpInfo = authCorpInfo;
 	}
 

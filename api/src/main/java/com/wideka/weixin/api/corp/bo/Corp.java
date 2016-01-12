@@ -9,7 +9,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @author JiakunXu
  * 
  */
-public class AuthCorpInfo implements Serializable {
+public class Corp implements Serializable {
 
 	private static final long serialVersionUID = 125749599836207935L;
 

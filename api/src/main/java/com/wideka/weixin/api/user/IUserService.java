@@ -9,7 +9,7 @@ import com.wideka.weixin.framework.bo.Result;
  * @author JiakunXu
  * 
  */
-public interface IUserInfoService {
+public interface IUserService {
 
 	String HTTPS_USER_INFO_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=$ACCESS_TOKEN$&code=$CODE$";

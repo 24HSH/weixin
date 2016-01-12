@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSON;
 import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.LogUtil;
-import com.wideka.weixin.api.user.IUserInfoService;
+import com.wideka.weixin.api.user.IUserService;
 import com.wideka.weixin.api.user.bo.User;
 import com.wideka.weixin.api.user.bo.UserObject;
 import com.wideka.weixin.api.user.bo.UserResult;
@@ -17,9 +17,9 @@ import com.wideka.weixin.framework.bo.Result;
  * @author JiakunXu
  * 
  */
-public class UserInfoServiceImpl implements IUserInfoService {
+public class UserServiceImpl implements IUserService {
 
-	private static Logger logger = Logger.getLogger(UserInfoServiceImpl.class);
+	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
 
 	@Override
 	public User getUserInfo(String accessToken, String code) throws RuntimeException {
@@ -35,7 +35,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 		try {
 			user =
-				JSON.parseObject(HttpUtil.get(IUserInfoService.HTTPS_USER_INFO_URL.replace("$ACCESS_TOKEN$",
+				JSON.parseObject(HttpUtil.get(IUserService.HTTPS_USER_INFO_URL.replace("$ACCESS_TOKEN$",
 					accessToken.trim()).replace("$CODE$", code.trim())), User.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + code, e);
@@ -69,7 +69,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 		try {
 			result =
-				JSON.parseObject(HttpUtil.get(IUserInfoService.HTTPS_AUTH_SUCC_URL.replace("$ACCESS_TOKEN$",
+				JSON.parseObject(HttpUtil.get(IUserService.HTTPS_AUTH_SUCC_URL.replace("$ACCESS_TOKEN$",
 					accessToken.trim()).replace("$USERID$", userId.trim())), Result.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + userId, e);
@@ -104,7 +104,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		try {
 			result =
 				JSON.parseObject(
-					HttpUtil.post(IUserInfoService.HTTPS_CREATE_URL + accessToken.trim(), JSON.toJSONString(user)),
+					HttpUtil.post(IUserService.HTTPS_CREATE_URL + accessToken.trim(), JSON.toJSONString(user)),
 					Result.class);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(user), e);
@@ -139,7 +139,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		try {
 			result =
 				JSON.parseObject(
-					HttpUtil.post(IUserInfoService.HTTPS_UPDATE_URL + accessToken.trim(), JSON.toJSONString(user)),
+					HttpUtil.post(IUserService.HTTPS_UPDATE_URL + accessToken.trim(), JSON.toJSONString(user)),
 					Result.class);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(user), e);
@@ -173,8 +173,9 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
 		try {
 			result =
-				JSON.parseObject(HttpUtil.get(IUserInfoService.HTTPS_DELETE_URL.replace("$ACCESS_TOKEN$",
-					accessToken.trim()).replace("$USERID$", userId.trim())), Result.class);
+				JSON.parseObject(
+					HttpUtil.get(IUserService.HTTPS_DELETE_URL.replace("$ACCESS_TOKEN$", accessToken.trim()).replace(
+						"$USERID$", userId.trim())), Result.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + userId, e);
 
@@ -211,7 +212,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		try {
 			result =
 				JSON.parseObject(
-					HttpUtil.post(IUserInfoService.HTTPS_BATCH_DELETE_URL + accessToken.trim(),
+					HttpUtil.post(IUserService.HTTPS_BATCH_DELETE_URL + accessToken.trim(),
 						JSON.toJSONString(userObject)), Result.class);
 		} catch (Exception e) {
 			logger.error(LogUtil.parserBean(userObject), e);
@@ -246,7 +247,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		try {
 			result =
 				JSON.parseObject(
-					HttpUtil.get(IUserInfoService.HTTPS_GET_URL.replace("$ACCESS_TOKEN$", accessToken.trim()).replace(
+					HttpUtil.get(IUserService.HTTPS_GET_URL.replace("$ACCESS_TOKEN$", accessToken.trim()).replace(
 						"$USERID$", userId.trim())), User.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + userId, e);
@@ -290,7 +291,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		try {
 			result =
 				JSON.parseObject(
-					HttpUtil.get(IUserInfoService.HTTPS_SIMPLE_LIST_URL.replace("$ACCESS_TOKEN$", accessToken.trim())
+					HttpUtil.get(IUserService.HTTPS_SIMPLE_LIST_URL.replace("$ACCESS_TOKEN$", accessToken.trim())
 						.replace("$DEPARTMENT_ID$", departmentId.trim()).replace("$FETCH_CHILD$", fetchChild.trim())
 						.replace("$STATUS$", status.trim())), UserResult.class);
 		} catch (Exception e) {
@@ -335,7 +336,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		try {
 			result =
 				JSON.parseObject(
-					HttpUtil.get(IUserInfoService.HTTPS_LIST_URL.replace("$ACCESS_TOKEN$", accessToken.trim())
+					HttpUtil.get(IUserService.HTTPS_LIST_URL.replace("$ACCESS_TOKEN$", accessToken.trim())
 						.replace("$DEPARTMENT_ID$", departmentId.trim()).replace("$FETCH_CHILD$", fetchChild.trim())
 						.replace("$STATUS$", status.trim())), UserResult.class);
 		} catch (Exception e) {
@@ -374,7 +375,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 		try {
 			result =
 				JSON.parseObject(
-					HttpUtil.post(IUserInfoService.HTTPS_INVITE_URL + accessToken.trim(), JSON.toJSONString(user)),
+					HttpUtil.post(IUserService.HTTPS_INVITE_URL + accessToken.trim(), JSON.toJSONString(user)),
 					UserResult.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + userId, e);
