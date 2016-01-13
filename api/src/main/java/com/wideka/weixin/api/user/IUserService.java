@@ -158,7 +158,7 @@ public interface IUserService {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	User convertToOpenId(String accessToken, String userId, int agentId) throws RuntimeException;
+	User convertToOpenId(String accessToken, String userId, Integer agentId) throws RuntimeException;
 
 	/**
 	 * 

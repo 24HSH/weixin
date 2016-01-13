@@ -399,7 +399,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User convertToOpenId(String accessToken, String userId, int agentId) throws RuntimeException {
+	public User convertToOpenId(String accessToken, String userId, Integer agentId) throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
 		}
