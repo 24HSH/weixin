@@ -1,6 +1,9 @@
 package com.wideka.weixin.api.user;
 
+import java.util.List;
+
 import com.wideka.weixin.api.user.bo.User;
+import com.wideka.weixin.api.user.bo.UserInfo;
 import com.wideka.weixin.api.user.bo.UserResult;
 import com.wideka.weixin.framework.bo.Result;
 
@@ -45,7 +48,7 @@ public interface IUserService {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	User getUserInfo(String accessToken, String code) throws RuntimeException;
+	UserInfo getUserInfo(String accessToken, String code) throws RuntimeException;
 
 	/**
 	 * 
@@ -118,7 +121,7 @@ public interface IUserService {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	UserResult getSimpleUserList(String accessToken, String departmentId, String fetchChild, String status)
+	List<User> getSimpleUserList(String accessToken, String departmentId, String fetchChild, String status)
 		throws RuntimeException;
 
 	/**
@@ -131,7 +134,7 @@ public interface IUserService {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	UserResult getUserList(String accessToken, String departmentId, String fetchChild, String status)
+	List<User> getUserList(String accessToken, String departmentId, String fetchChild, String status)
 		throws RuntimeException;
 
 	/**

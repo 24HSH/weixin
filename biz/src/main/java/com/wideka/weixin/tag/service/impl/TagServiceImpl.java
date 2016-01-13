@@ -1,5 +1,7 @@
 package com.wideka.weixin.tag.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -233,7 +235,7 @@ public class TagServiceImpl implements ITagService {
 	}
 
 	@Override
-	public TagResult getTagList(String accessToken) throws RuntimeException {
+	public List<Tag> getTagList(String accessToken) throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
 		}
@@ -257,7 +259,7 @@ public class TagServiceImpl implements ITagService {
 			throw new RuntimeException(result.getErrMsg());
 		}
 
-		return result;
+		return result.getTagList();
 	}
 
 }

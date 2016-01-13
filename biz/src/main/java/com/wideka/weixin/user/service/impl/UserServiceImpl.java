@@ -1,5 +1,7 @@
 package com.wideka.weixin.user.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -8,6 +10,7 @@ import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.user.IUserService;
 import com.wideka.weixin.api.user.bo.User;
+import com.wideka.weixin.api.user.bo.UserInfo;
 import com.wideka.weixin.api.user.bo.UserObject;
 import com.wideka.weixin.api.user.bo.UserResult;
 import com.wideka.weixin.framework.bo.Result;
@@ -22,7 +25,7 @@ public class UserServiceImpl implements IUserService {
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
 
 	@Override
-	public User getUserInfo(String accessToken, String code) throws RuntimeException {
+	public UserInfo getUserInfo(String accessToken, String code) throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
 		}
@@ -31,12 +34,12 @@ public class UserServiceImpl implements IUserService {
 			throw new RuntimeException("code cannot be null.");
 		}
 
-		User user = null;
+		UserInfo user = null;
 
 		try {
 			user =
 				JSON.parseObject(HttpUtil.get(IUserService.HTTPS_USER_INFO_URL.replace("$ACCESS_TOKEN$",
-					accessToken.trim()).replace("$CODE$", code.trim())), User.class);
+					accessToken.trim()).replace("$CODE$", code.trim())), UserInfo.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + code, e);
 
@@ -268,7 +271,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UserResult getSimpleUserList(String accessToken, String departmentId, String fetchChild, String status)
+	public List<User> getSimpleUserList(String accessToken, String departmentId, String fetchChild, String status)
 		throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
@@ -309,11 +312,11 @@ public class UserServiceImpl implements IUserService {
 			throw new RuntimeException(result.getErrMsg());
 		}
 
-		return result;
+		return result.getUserList();
 	}
 
 	@Override
-	public UserResult getUserList(String accessToken, String departmentId, String fetchChild, String status)
+	public List<User> getUserList(String accessToken, String departmentId, String fetchChild, String status)
 		throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
@@ -354,7 +357,7 @@ public class UserServiceImpl implements IUserService {
 			throw new RuntimeException(result.getErrMsg());
 		}
 
-		return result;
+		return result.getUserList();
 	}
 
 	@Override

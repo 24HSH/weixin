@@ -1,5 +1,7 @@
 package com.wideka.weixin.api.tag;
 
+import java.util.List;
+
 import com.wideka.weixin.api.tag.bo.Tag;
 import com.wideka.weixin.api.tag.bo.TagObject;
 import com.wideka.weixin.api.tag.bo.TagResult;
@@ -95,6 +97,6 @@ public interface ITagService {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	TagResult getTagList(String accessToken) throws RuntimeException;
+	List<Tag> getTagList(String accessToken) throws RuntimeException;
 
 }
