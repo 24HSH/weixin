@@ -18,6 +18,12 @@ public class User extends Result {
 	@JSONField(name = "userid")
 	private String userId;
 
+	/**
+	 * 企业号成员userid对应的openid，若有传参agentid，则是针对该agentid的openid。否则是针对企业号corpid的openid.
+	 */
+	@JSONField(name = "openid")
+	private String openId;
+
 	@JSONField(name = "status")
 	private int status;
 
@@ -71,12 +77,34 @@ public class User extends Result {
 	@JSONField(name = "avatar_mediaid")
 	private String avatarMediaId;
 
+	// >>>>>>>>>>以下是辅助属性<<<<<<<<<<
+
+	/**
+	 * 整型，需要发送红包的应用ID，若只是使用微信支付和企业转账，则无需该参数.
+	 */
+	@JSONField(name = "agentid")
+	private Integer agentId;
+
+	/**
+	 * 应用的appid，若请求包中不包含agentid则不返回appid。该appid在使用微信红包时会用到.
+	 */
+	@JSONField(name = "appid")
+	private String appId;
+
 	public String getUserId() {
 		return userId;
 	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 
 	public int getStatus() {
@@ -149,6 +177,22 @@ public class User extends Result {
 
 	public void setAvatarMediaId(String avatarMediaId) {
 		this.avatarMediaId = avatarMediaId;
+	}
+
+	public Integer getAgentId() {
+		return agentId;
+	}
+
+	public void setAgentId(Integer agentId) {
+		this.agentId = agentId;
+	}
+
+	public String getAppId() {
+		return appId;
+	}
+
+	public void setAppId(String appId) {
+		this.appId = appId;
 	}
 
 }

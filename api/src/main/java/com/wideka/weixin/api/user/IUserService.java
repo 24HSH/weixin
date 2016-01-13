@@ -14,7 +14,7 @@ import com.wideka.weixin.framework.bo.Result;
  */
 public interface IUserService {
 
-	String HTTPS_USER_INFO_URL =
+	String HTTPS_GET_USER_INFO_URL =
 		"https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=$ACCESS_TOKEN$&code=$CODE$";
 
 	String HTTPS_AUTH_SUCC_URL =
@@ -38,6 +38,10 @@ public interface IUserService {
 		"https://qyapi.weixin.qq.com/cgi-bin/user/list?access_token=$ACCESS_TOKEN$&department_id=$DEPARTMENT_ID$&fetch_child=$FETCH_CHILD$&status=$STATUS$";
 
 	String HTTPS_INVITE_URL = "https://qyapi.weixin.qq.com/cgi-bin/invite/send?access_token=";
+
+	String HTTPS_CONVERT_TO_OPEN_ID_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/convert_to_openid?access_token=";
+
+	String HTTPS_CONVERT_TO_USER_ID_URL = "https://qyapi.weixin.qq.com/cgi-bin/user/convert_to_userid?access_token=";
 
 	/**
 	 * 
@@ -145,5 +149,24 @@ public interface IUserService {
 	 * @throws RuntimeException
 	 */
 	UserResult inviteUser(String accessToken, String userId) throws RuntimeException;
+
+	/**
+	 * 
+	 * @param accessToken
+	 * @param userId
+	 * @param agentId
+	 * @return
+	 * @throws RuntimeException
+	 */
+	User convertToOpenId(String accessToken, String userId, int agentId) throws RuntimeException;
+
+	/**
+	 * 
+	 * @param accessToken
+	 * @param openId
+	 * @return
+	 * @throws RuntimeException
+	 */
+	User convertToUserId(String accessToken, String openId) throws RuntimeException;
 
 }

@@ -38,7 +38,7 @@ public class UserServiceImpl implements IUserService {
 
 		try {
 			user =
-				JSON.parseObject(HttpUtil.get(IUserService.HTTPS_USER_INFO_URL.replace("$ACCESS_TOKEN$",
+				JSON.parseObject(HttpUtil.get(IUserService.HTTPS_GET_USER_INFO_URL.replace("$ACCESS_TOKEN$",
 					accessToken.trim()).replace("$CODE$", code.trim())), UserInfo.class);
 		} catch (Exception e) {
 			logger.error(accessToken + "&" + code, e);
@@ -397,4 +397,82 @@ public class UserServiceImpl implements IUserService {
 
 		return result;
 	}
+
+	@Override
+	public User convertToOpenId(String accessToken, String userId, int agentId) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(userId)) {
+			throw new RuntimeException("userid cannot be null.");
+		}
+
+		User user = new User();
+		user.setUserId(userId.trim());
+		user.setAgentId(agentId);
+
+		User result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.post(IUserService.HTTPS_CONVERT_TO_OPEN_ID_URL + accessToken.trim(),
+						JSON.toJSONString(user)), User.class);
+		} catch (Exception e) {
+			logger.error(accessToken + "&" + userId, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
+	}
+
+	@Override
+	public User convertToUserId(String accessToken, String openId) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(openId)) {
+			throw new RuntimeException("openid cannot be null.");
+		}
+
+		User user = new User();
+		user.setOpenId(openId.trim());
+
+		User result = null;
+
+		try {
+			result =
+				JSON.parseObject(
+					HttpUtil.post(IUserService.HTTPS_CONVERT_TO_USER_ID_URL + accessToken.trim(),
+						JSON.toJSONString(user)), User.class);
+		} catch (Exception e) {
+			logger.error(accessToken + "&" + openId, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (result == null) {
+			throw new RuntimeException("result is null.");
+		}
+
+		String errCode = result.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(result.getErrMsg());
+		}
+
+		return result;
+	}
+
 }
