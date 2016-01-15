@@ -18,7 +18,7 @@ public class JSAPITicketServiceImpl implements IJSAPITicketService {
 	private static Logger logger = Logger.getLogger(JSAPITicketServiceImpl.class);
 
 	@Override
-	public Ticket getJSAPITicket(String accessToken) throws RuntimeException {
+	public Ticket getTicket(String accessToken) throws RuntimeException {
 		if (StringUtils.isBlank(accessToken)) {
 			throw new RuntimeException("access_token cannot be null.");
 		}

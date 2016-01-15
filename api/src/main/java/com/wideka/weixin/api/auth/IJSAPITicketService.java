@@ -17,6 +17,6 @@ public interface IJSAPITicketService {
 	 * @return
 	 * @throws RuntimeException
 	 */
-	Ticket getJSAPITicket(String accessToken) throws RuntimeException;
+	Ticket getTicket(String accessToken) throws RuntimeException;
 
 }
