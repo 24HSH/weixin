@@ -27,7 +27,44 @@ public class JSAPITicketServiceImpl implements IJSAPITicketService {
 
 		try {
 			ticket =
-				JSON.parseObject(HttpUtil.get(IJSAPITicketService.HTTPS_TICKET_URL + accessToken.trim()), Ticket.class);
+				JSON.parseObject(
+					HttpUtil.get(IJSAPITicketService.HTTPS_TICKET_URL.replace("$accessToken$", accessToken.trim())),
+					Ticket.class);
+		} catch (Exception e) {
+			logger.error(accessToken, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (ticket == null) {
+			throw new RuntimeException("ticket is null.");
+		}
+
+		String errCode = ticket.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(ticket.getErrMsg());
+		}
+
+		String token = ticket.getTicket();
+
+		if (StringUtils.isBlank(token)) {
+			throw new RuntimeException("ticket is blank.");
+		}
+
+		return ticket;
+	}
+
+	@Override
+	public Ticket getTicket4Corp(String accessToken) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		Ticket ticket = null;
+
+		try {
+			ticket =
+				JSON.parseObject(HttpUtil.get(IJSAPITicketService.HTTPS_TICKET_ULR + accessToken.trim()), Ticket.class);
 		} catch (Exception e) {
 			logger.error(accessToken, e);
 

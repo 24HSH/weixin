@@ -9,9 +9,22 @@ import com.wideka.weixin.api.auth.bo.AccessToken;
  */
 public interface IAccessTokenService {
 
-	String HTTPS_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$id$&corpsecret=$secrect$";
+	String HTTPS_TOKEN_URL =
+		"https://api.weixin.qq.com/cgi-bin/token?grant_type=$grantType$&appid=$appId$&secret=$appSecret$";
+
+	String HTTPS_TOKEN_ULR = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$id$&corpsecret=$secrect$";
 
 	String HTTPS_CORP_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=";
+
+	/**
+	 * 
+	 * @param grantType
+	 * @param appId
+	 * @param appSecret
+	 * @return
+	 * @throws RuntimeException
+	 */
+	AccessToken getToken(String grantType, String appId, String appSecret) throws RuntimeException;
 
 	/**
 	 * 
