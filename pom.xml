@@ -12,7 +12,6 @@
 		<java.encoding>UTF-8</java.encoding>
 
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
-		<commons-httpclient.version>3.0.1</commons-httpclient.version>
 		<commons-lang.version>2.6</commons-lang.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<fastjson.version>1.2.6</fastjson.version>
@@ -34,12 +33,6 @@
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
 				<version>${commons-beanutils.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>commons-httpclient</groupId>
-				<artifactId>commons-httpclient</artifactId>
-				<version>${commons-httpclient.version}</version>
 			</dependency>
 
 			<dependency>
