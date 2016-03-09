@@ -159,7 +159,7 @@ public class UnifiedOrderServiceImpl implements IUnifiedOrderService {
 		}
 
 		if ("FAIL".equals(ret.getResultCode())) {
-			throw new RuntimeException(ret.getErrCode() + "|" + ret.getErrCodeDes());
+			throw new RuntimeException(ret.getErrCodeDes());
 		}
 
 		return ret.getUnifiedOrder().getPrePayId();

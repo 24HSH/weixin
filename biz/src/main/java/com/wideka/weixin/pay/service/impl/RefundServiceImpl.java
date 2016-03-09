@@ -127,7 +127,7 @@ public class RefundServiceImpl implements IRefundService {
 		}
 
 		if ("FAIL".equals(ret.getResultCode())) {
-			throw new RuntimeException(ret.getErrCode() + "|" + ret.getErrCodeDes());
+			throw new RuntimeException(ret.getErrCodeDes());
 		}
 
 		return ret.getRefund();
