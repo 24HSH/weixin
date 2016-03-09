@@ -203,6 +203,12 @@ public class RefundServiceImpl implements IRefundService {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param ret
+	 * @param key
+	 * @return
+	 */
 	private boolean validate(RefundReturn ret, String key) {
 		Refund refund = ret.getRefund();
 
@@ -244,6 +250,12 @@ public class RefundServiceImpl implements IRefundService {
 		if (StringUtils.isNotBlank(refund.getNonceStr())) {
 			sign.append("&nonce_str=").append(refund.getNonceStr());
 		}
+		if (StringUtils.isNotBlank(refund.getOutRefundNo())) {
+			sign.append("&out_refund_no=").append(refund.getOutRefundNo());
+		}
+		if (StringUtils.isNotBlank(refund.getOutTradeNo())) {
+			sign.append("&out_trade_no=").append(refund.getOutTradeNo());
+		}
 		if (StringUtils.isNotBlank(refund.getRefundChannel())) {
 			sign.append("&refund_channel=").append(refund.getRefundChannel());
 		}
@@ -264,6 +276,9 @@ public class RefundServiceImpl implements IRefundService {
 		}
 		if (refund.getTotalFee() != null) {
 			sign.append("&total_fee=").append(refund.getTotalFee());
+		}
+		if (StringUtils.isNotBlank(refund.getTransactionId())) {
+			sign.append("&transaction_id=").append(refund.getTransactionId());
 		}
 
 		sign.append("&key=").append(key);
