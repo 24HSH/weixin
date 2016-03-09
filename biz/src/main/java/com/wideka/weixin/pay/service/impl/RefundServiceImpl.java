@@ -110,14 +110,6 @@ public class RefundServiceImpl implements IRefundService {
 			throw new RuntimeException("申请退款失败.");
 		}
 
-		try {
-			result = new String(result.getBytes("GBK"), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			logger.error(result, e);
-
-			throw new RuntimeException("申请退款失败.");
-		}
-
 		RefundReturn ret = (RefundReturn) XmlUtil.parse(result, new RefundReturn());
 
 		if (ret == null) {
