@@ -1,13 +1,28 @@
 package com.wideka.weixin.pay.service.impl;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.security.KeyStore;
+
+import javax.net.ssl.SSLContext;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContexts;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 import com.wideka.club.framework.util.EncryptUtil;
-import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.club.framework.util.XmlUtil;
 import com.wideka.weixin.api.pay.IRefundService;
 import com.wideka.weixin.api.pay.bo.Refund;
@@ -23,9 +38,9 @@ public class RefundServiceImpl implements IRefundService {
 	private static Logger logger = Logger.getLogger(RefundServiceImpl.class);
 
 	@Override
-	public Refund refund(Refund refund, String key) throws RuntimeException {
+	public Refund refund(Refund refund, String key, String sslPath) throws RuntimeException {
 		if (refund == null) {
-			throw new RuntimeException("refund 退款单 不能为空.");
+			throw new RuntimeException("refund 申请退款单 不能为空.");
 		}
 
 		StringBuilder sign = new StringBuilder();
@@ -86,7 +101,7 @@ public class RefundServiceImpl implements IRefundService {
 		String result = null;
 
 		try {
-			result = HttpUtil.post(IRefundService.HTTPS_REFUND_URL, sb.toString());
+			result = post(IRefundService.HTTPS_REFUND_URL, sb.toString(), refund.getMchId(), sslPath);
 		} catch (Exception e) {
 			logger.error(sb.toString(), e);
 		}
@@ -124,6 +139,68 @@ public class RefundServiceImpl implements IRefundService {
 		}
 
 		return ret.getRefund();
+	}
+
+	/**
+	 * 
+	 * @param url
+	 * @param str
+	 * @param mchId
+	 * @param sslPath
+	 * @return
+	 * @throws Exception
+	 */
+	private String post(String url, String str, String mchId, String sslPath) throws Exception {
+		KeyStore keyStore = KeyStore.getInstance("PKCS12");
+		FileInputStream instream = new FileInputStream(new File(sslPath));
+		try {
+			keyStore.load(instream, mchId.toCharArray());
+		} finally {
+			instream.close();
+		}
+
+		// Trust own CA and all self-signed certs
+		SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, mchId.toCharArray()).build();
+		// Allow TLSv1 protocol only
+		SSLConnectionSocketFactory sslsf =
+			new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" }, null,
+				SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+		CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+		try {
+			HttpEntity httpEntity = null;
+			try {
+				httpEntity = new StringEntity(str, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				throw new Exception("不支持的编码集", e);
+			}
+
+			HttpPost httpPost = new HttpPost(url);
+			httpPost.setEntity(httpEntity);
+
+			CloseableHttpResponse response = httpclient.execute(httpPost);
+			try {
+				HttpEntity entity = response.getEntity();
+
+				if (entity != null) {
+					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent()));
+
+					StringBuilder responseStr = new StringBuilder();
+					String text;
+					while ((text = bufferedReader.readLine()) != null) {
+						responseStr.append(text);
+					}
+
+					return responseStr.toString();
+				}
+				EntityUtils.consume(entity);
+			} finally {
+				response.close();
+			}
+		} finally {
+			httpclient.close();
+		}
+
+		return null;
 	}
 
 	private boolean validate(RefundReturn ret, String key) {
