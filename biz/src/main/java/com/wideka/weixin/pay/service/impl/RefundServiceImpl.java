@@ -22,11 +22,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
-import com.wideka.club.framework.util.EncryptUtil;
-import com.wideka.club.framework.util.XmlUtil;
 import com.wideka.weixin.api.pay.IRefundService;
 import com.wideka.weixin.api.pay.bo.Refund;
 import com.wideka.weixin.api.pay.bo.RefundReturn;
+import com.wideka.weixin.framework.util.EncryptUtil;
+import com.wideka.weixin.framework.util.XmlUtil;
 
 /**
  * 

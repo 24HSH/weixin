@@ -6,12 +6,12 @@ import java.io.UnsupportedEncodingException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.wideka.club.framework.util.EncryptUtil;
-import com.wideka.club.framework.util.HttpUtil;
-import com.wideka.club.framework.util.XmlUtil;
 import com.wideka.weixin.api.pay.IUnifiedOrderService;
 import com.wideka.weixin.api.pay.bo.UnifiedOrder;
 import com.wideka.weixin.api.pay.bo.UnifiedOrderReturn;
+import com.wideka.weixin.framework.util.EncryptUtil;
+import com.wideka.weixin.framework.util.HttpUtil;
+import com.wideka.weixin.framework.util.XmlUtil;
 
 /**
  * 

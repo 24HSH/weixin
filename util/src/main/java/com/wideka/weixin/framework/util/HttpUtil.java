@@ -1,4 +1,4 @@
-package com.wideka.club.framework.util;
+package com.wideka.weixin.framework.util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

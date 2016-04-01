@@ -1,4 +1,4 @@
-package com.wideka.club.framework.util;
+package com.wideka.weixin.framework.util;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
