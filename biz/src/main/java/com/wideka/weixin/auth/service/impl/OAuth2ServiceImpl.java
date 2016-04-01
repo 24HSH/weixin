@@ -4,9 +4,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
-import com.wideka.club.framework.util.HttpUtil;
 import com.wideka.weixin.api.auth.IOAuth2Service;
 import com.wideka.weixin.api.auth.bo.AccessToken;
+import com.wideka.weixin.framework.util.HttpUtil;
 
 /**
  * 

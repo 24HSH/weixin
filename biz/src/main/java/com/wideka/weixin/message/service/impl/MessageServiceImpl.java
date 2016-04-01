@@ -4,8 +4,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
-import com.wideka.club.framework.util.HttpUtil;
-import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.message.IMessageService;
 import com.wideka.weixin.api.message.bo.File;
 import com.wideka.weixin.api.message.bo.Image;
@@ -16,6 +14,8 @@ import com.wideka.weixin.api.message.bo.SendResult;
 import com.wideka.weixin.api.message.bo.Text;
 import com.wideka.weixin.api.message.bo.Video;
 import com.wideka.weixin.api.message.bo.Voice;
+import com.wideka.weixin.framework.util.HttpUtil;
+import com.wideka.weixin.framework.util.LogUtil;
 
 /**
  * 

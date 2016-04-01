@@ -6,14 +6,14 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
-import com.wideka.club.framework.util.HttpUtil;
-import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.user.IUserService;
 import com.wideka.weixin.api.user.bo.User;
 import com.wideka.weixin.api.user.bo.UserInfo;
 import com.wideka.weixin.api.user.bo.UserObject;
 import com.wideka.weixin.api.user.bo.UserResult;
 import com.wideka.weixin.framework.bo.Result;
+import com.wideka.weixin.framework.util.HttpUtil;
+import com.wideka.weixin.framework.util.LogUtil;
 
 /**
  * 

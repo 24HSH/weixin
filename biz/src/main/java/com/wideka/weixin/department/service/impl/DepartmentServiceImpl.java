@@ -4,12 +4,12 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
-import com.wideka.club.framework.util.HttpUtil;
-import com.wideka.club.framework.util.LogUtil;
 import com.wideka.weixin.api.department.IDepartmentService;
 import com.wideka.weixin.api.department.bo.Department;
 import com.wideka.weixin.api.department.bo.DepartmentObject;
 import com.wideka.weixin.framework.bo.Result;
+import com.wideka.weixin.framework.util.HttpUtil;
+import com.wideka.weixin.framework.util.LogUtil;
 
 /**
  * 

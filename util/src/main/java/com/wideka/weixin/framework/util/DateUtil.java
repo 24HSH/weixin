@@ -1,4 +1,4 @@
-package com.wideka.club.framework.util;
+package com.wideka.weixin.framework.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;

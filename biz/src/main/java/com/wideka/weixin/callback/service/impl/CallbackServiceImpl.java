@@ -6,11 +6,11 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSON;
 import com.qq.weixin.mp.aes.AesException;
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
-import com.wideka.club.framework.util.HttpUtil;
-import com.wideka.club.framework.util.XmlUtil;
 import com.wideka.weixin.api.callback.ICallbackService;
 import com.wideka.weixin.api.callback.bo.Content;
 import com.wideka.weixin.api.suite.bo.IP;
+import com.wideka.weixin.framework.util.HttpUtil;
+import com.wideka.weixin.framework.util.XmlUtil;
 
 /**
  * 
