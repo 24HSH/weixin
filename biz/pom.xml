@@ -30,9 +30,9 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
+					<descriptors>
+						<descriptor>src/main/resources/jar-with-dependencies.xml</descriptor>
+					</descriptors>
 				</configuration>
 				<executions>
 					<execution>
