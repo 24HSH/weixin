@@ -117,7 +117,7 @@ public final class HttpUtil {
 	 * @throws Exception
 	 */
 	public static String get(String url) throws Exception {
-		return get(url, null, null);
+		return get(url, null);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public final class HttpUtil {
 	 * @throws Exception
 	 */
 	public static String get(String url, Map<String, String> params) throws Exception {
-		return get(url, params, null);
+		return get(url, params, CHARSET_UTF8);
 	}
 
 	/**
