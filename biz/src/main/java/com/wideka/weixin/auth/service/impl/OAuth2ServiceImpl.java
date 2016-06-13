@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSON;
 import com.wideka.weixin.api.auth.IOAuth2Service;
 import com.wideka.weixin.api.auth.bo.AccessToken;
+import com.wideka.weixin.api.auth.bo.UserInfo;
 import com.wideka.weixin.framework.util.HttpUtil;
 
 /**
@@ -72,6 +73,40 @@ public class OAuth2ServiceImpl implements IOAuth2Service {
 		}
 
 		return accessToken;
+	}
+
+	@Override
+	public UserInfo getUserInfo(String accessToken, String openId) throws RuntimeException {
+		if (StringUtils.isBlank(accessToken)) {
+			throw new RuntimeException("access_token cannot be null.");
+		}
+
+		if (StringUtils.isBlank(openId)) {
+			throw new RuntimeException("openId cannot be null.");
+		}
+
+		UserInfo user = null;
+
+		try {
+			user =
+				JSON.parseObject(HttpUtil.get(IOAuth2Service.HTTPS_USER_INFO_URL.replace("$ACCESS_TOKEN$",
+					accessToken.trim()).replace("$OPENID$", openId.trim())), UserInfo.class);
+		} catch (Exception e) {
+			logger.error(accessToken + "&" + openId, e);
+
+			throw new RuntimeException("HttpUtil error.", e);
+		}
+
+		if (user == null) {
+			throw new RuntimeException("user is null.");
+		}
+
+		String errCode = user.getErrCode();
+		if (StringUtils.isNotBlank(errCode) && !"0".equals(errCode)) {
+			throw new RuntimeException(user.getErrMsg());
+		}
+
+		return user;
 	}
 
 }
