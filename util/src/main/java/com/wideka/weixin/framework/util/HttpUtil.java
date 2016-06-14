@@ -96,7 +96,8 @@ public final class HttpUtil {
 			if (entity != null) {
 				@SuppressWarnings("deprecation")
 				String charset =
-					EntityUtils.getContentCharSet(entity) == null ? CHARSET_GBK : EntityUtils.getContentCharSet(entity);
+					EntityUtils.getContentCharSet(entity) == null ? CHARSET_UTF8 : EntityUtils
+						.getContentCharSet(entity);
 				return new String(EntityUtils.toByteArray(entity), charset);
 			} else {
 				return null;
