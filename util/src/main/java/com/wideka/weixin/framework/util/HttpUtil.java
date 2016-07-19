@@ -96,7 +96,8 @@ public final class HttpUtil {
 			if (entity != null) {
 				@SuppressWarnings("deprecation")
 				String charset =
-					EntityUtils.getContentCharSet(entity) == null ? CHARSET_GBK : EntityUtils.getContentCharSet(entity);
+					EntityUtils.getContentCharSet(entity) == null ? CHARSET_UTF8 : EntityUtils
+						.getContentCharSet(entity);
 				return new String(EntityUtils.toByteArray(entity), charset);
 			} else {
 				return null;
@@ -117,7 +118,7 @@ public final class HttpUtil {
 	 * @throws Exception
 	 */
 	public static String get(String url) throws Exception {
-		return get(url, null, null);
+		return get(url, null);
 	}
 
 	/**
@@ -131,7 +132,7 @@ public final class HttpUtil {
 	 * @throws Exception
 	 */
 	public static String get(String url, Map<String, String> params) throws Exception {
-		return get(url, params, null);
+		return get(url, params, CHARSET_UTF8);
 	}
 
 	/**
@@ -157,7 +158,7 @@ public final class HttpUtil {
 
 		List<NameValuePair> qparams = getParamsList(params);
 		if (qparams != null && qparams.size() > 0) {
-			charsets = charsets == null ? CHARSET_GBK : charsets;
+			charsets = charsets == null ? CHARSET_UTF8 : charsets;
 			String formatParams = URLEncodedUtils.format(qparams, charsets);
 			urls =
 				(urls.indexOf('?')) < 0 ? (urls + "?" + formatParams)
@@ -381,7 +382,7 @@ public final class HttpUtil {
 			"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)");
 		httpclient.getParams().setParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, Boolean.FALSE);
 		httpclient.getParams().setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET,
-			charset == null ? CHARSET_GBK : charset);
+			charset == null ? CHARSET_UTF8 : charset);
 		httpclient.setHttpRequestRetryHandler(requestRetryHandler);
 
 		return httpclient;
